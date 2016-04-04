@@ -1,0 +1,10 @@
+{
+   "require":{
+        "phpmailer/phpmailer": "5.2.9",
+         "smarty/smarty": "3.1.20",
+         "setasign/fpdf": "1.8",
+         "deviservi/nusoap":"dev-master",
+         "fxp/composer-asset-plugin":"~1.1.1"
+         
+   }
+}

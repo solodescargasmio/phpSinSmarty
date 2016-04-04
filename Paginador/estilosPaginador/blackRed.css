@@ -1,0 +1,40 @@
+/*Black red style*/
+/* http://mis-algoritmos.com/some-styles-for-your-pagination */
+div.black-red {
+    margin:  0 auto;
+    text-align: center;
+    font-size: 11px;
+    font-family: Tahoma, Arial, Helvetica, Sans-serif;
+    background-color:#3e3e3e;
+    color: #fff;
+    padding-top: 5px;
+    height: 20px;
+}
+
+div.black-red a {
+    padding: 2px 5px 2px 5px;
+    margin: 2px;
+    background-color:#3e3e3e;
+    text-decoration: none; /* no underline */
+    color: #fff;
+}
+
+div.black-red a:hover, div.black-red a:active {
+    background-color:#ec5210;
+    color: #fff;
+}
+
+div.black-red span.current {
+    padding: 2px 5px 2px 5px;
+    margin: 2px;
+    font-weight: bold;
+    background-color: #313131;
+    color: #fff;
+}
+
+div.black-red span.disabled {
+    padding: 2px 5px 2px 5px;
+    margin: 2px;
+    background-color:#3e3e3e;
+    color: #868686;
+}

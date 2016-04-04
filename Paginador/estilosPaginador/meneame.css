@@ -1,0 +1,42 @@
+/*Meneame*/
+/*http://mis-algoritmos.com/some-styles-for-your-pagination*/
+div.meneame {
+    padding: 3px;
+    margin: 3px;
+    color:#ff6500;
+    font-size:80%;
+    text-align:center;
+}
+	
+div.meneame a {
+    border: 1px solid #ff9600;
+    margin-right:3px;
+    padding:5px 7px;
+    background-image:url(../img/meneame.jpg);
+    background-position:bottom;
+    text-decoration: none;
+    color: #ff6500;		
+}
+	
+div.meneame a:hover, div.meneame a:active {
+    border: 1px solid #ff9600;
+    background-image:none;
+    background-color:#ffc794;
+    color: #ff6500;
+}
+	
+div.meneame span.current {
+    margin-right:3px;
+    padding:5px 7px;
+    border: 1px solid #ff6500;
+    font-weight: bold;
+    background-color: #ffbe94;
+    color: #ff6500;
+}
+
+div.meneame span.disabled {
+    margin-right:3px;
+    padding:5px 7px;
+    border: 1px solid #ffe3c6;
+    color: #ffe3c6;
+}

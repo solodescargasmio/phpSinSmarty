@@ -1,0 +1,16 @@
+/* CSS Document */
+/**http://blog.timersys.com/php/paginacion-con-php-y-mysql-3-estilos/ */
+/*Digg*/
+#pagination-clean li          { border:0; margin:0; padding:0; font-size:11px; list-style:none; /* savers */ float:left; }
+/* savers #pagination-clean li,*/
+#pagination-clean a           { border-right:solid 1px #DEDEDE; margin-right:2px; }
+#pagination-clean .previous-off,
+#pagination-clean .next-off   { color:#888888; display:block; float:left; font-weight:bold; padding:3px 4px; }
+#pagination-clean .next a,
+#pagination-clean previous a  { border:none; font-weight:bold; }
+#pagination-clean .active     { color:#000000; font-weight:bold; display:block; float:left; padding:4px 6px; /* savers */ border-right:solid 1px #DEDEDE; }
+#pagination-clean a:link,
+#pagination-clean a:visited   { color:#0e509e; display:block; float:left; padding:3px 6px; text-decoration:underline; }
+#pagination-clean a:hover     { text-decoration:none; }
+
+.paginas { color:#888888; display:block; float:left; font-weight:bold; padding:3px 4px; }

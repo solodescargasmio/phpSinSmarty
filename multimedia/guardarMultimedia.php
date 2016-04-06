@@ -15,7 +15,7 @@ require_once ('./clases/form_attr.php');
 require_once ('./conexion/configuracion.php');
 require_once ('crearMKdir.php');
 function subirDatos($id){ 
-    error_reporting(0);
+   // error_reporting(1);
  Session::init();
              $id_user=Session::get("cedula");
              $id_estudio= Session::get("estudio"); 
@@ -29,6 +29,7 @@ function subirDatos($id){
     
     if($_FILES["archivo"]["name"]){   
         for($i=0;$i<count($_FILES["archivo"]["name"]);$i++){
+     // var_dump($_FILES["archivo"]["name"][$i]);exit();
           $conta=0;
             foreach ($attribu as $key => $value) {
                  $id_attributo=$value->getId_attributo(); 
@@ -36,8 +37,7 @@ function subirDatos($id){
                      if(strcmp($_FILES["archivo"]["name"][$i],"")!=0){
  
     $directorio = dirname(__FILE__).'/'.$id_user;
-    
-
+   
 if (!file_exists($directorio)) {
     crearDir($id_user);
 }
@@ -70,18 +70,20 @@ $serv =dirname(__FILE__).'/'.$id_user.'/';
         
 	// Este es el nombre temporal del archivo mientras dura la transmisión
 	$remoto = $_FILES["archivo"]["tmp_name"][$i];
-        
+       
 	// Juntamos la ruta del servidor con el nombre real del archivo
 	$ruta = $serv.$local;
         
 		// Verificamos si ya se subio el archivo temporal
 		if (is_uploaded_file($remoto)){
+
                        //guardamos nombre en base de datos        
                   if(strcasecmp($ex, "jpeg")==0){
             $newpng =$value->getNombre().'.png'; 
              $png = imagepng(imagecreatefromjpeg($_FILES['archivo']['tmp_name'][$i]), $newpng);
              $ruta = $serv.$newpng;
              copy($remoto, $ruta);
+var_dump("copiado");exit();
              $ex="png";
                   }else
                     if(strcasecmp($ex, "jpg")==0){
@@ -106,10 +108,13 @@ $serv =dirname(__FILE__).'/'.$id_user.'/';
              $ex="png";           
                          }else
       if(strcmp($ex,"avi")==0||strcmp($ex,"mp4")==0||strcmp($ex,"wmv")==0||strcmp($ex,"mkv")==0||strcmp($ex,"3gp")==0){
-             $newpng=$value->getNombre().".".$ex;
+//var_dump("dentro del if");exit();            
+ $newpng=$value->getNombre().".".$ex;
+ 
                                 copy($remoto, $ruta);  
          $video=exec("ffmpeg -i ".$remoto." -ss 00:00:00 -t 00:01:00 -async 1 ./multimedia/$id_user/".$value->getNombre().".webm");
-               //  exec("ffmpeg -i ".$remoto." -vcodec copy -ss 1 -t 120 -acodec ".$varia.".webm 2>&1"); 
+                
+ //  exec("ffmpeg -i ".$remoto." -vcodec copy -ss 1 -t 120 -acodec ".$varia.".webm 2>&1"); 
           $ruta = $serv.$video; 
          copy($remoto, $ruta);
          }else{

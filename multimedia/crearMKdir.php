@@ -9,7 +9,8 @@ function crearDir($id) {
    $ruta=dirname(__FILE__).'/'.$id;
    //var_dump($ruta);exit();
             if (!file_exists($ruta)) {  
-    mkdir($ruta, 0777, true);   
+    mkdir($ruta, 0777,true)or die('Fallo al crear el directorio'); 
+  
 //    header('Location: index.php');
 }
 }

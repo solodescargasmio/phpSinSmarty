@@ -91,7 +91,7 @@ $form=new formulario();
     <div class="col-lg-offset-2 col-lg-10">
    <?php  if((strcmp($estud->getExtencion(),"avi")==0)||(strcmp($estud->getExtencion(),"mp4")==0)||(strcmp($estud->getExtencion(),"wmv")==0)||(strcmp($estud->getExtencion(),"mkv")==0)||(strcmp($estud->getExtencion(),"3gp")==0)){  ?>             
  
-            <video width="200" height="100" controls>
+            <video width="250" height="120" controls>
   <source src="./multimedia/<?php echo $cedula; ?>/<?php echo $estud->getValor(); ?>" type="video/webm">
 Tu navegador no soporta este tipo de video.
 </video> 

@@ -387,6 +387,7 @@ if($_POST['modificar']){
         
         }
          if(isset($_FILES)){
+          //var_dump($_FILES);exit();
 subirDatos($idf);
             }
         

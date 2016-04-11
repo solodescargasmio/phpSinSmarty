@@ -30,7 +30,7 @@ $(document).ready(function(){
   	$("#mostrar").on( "click", function() {
                     dat=document.getElementById("nom_formulario").value;
     if(dat==""){
-        alert("POr favor ingrese un nombre al formulario. Gracias");
+        alert("Ingrese un nombre al formulario. Gracias");
         }else {
 			$('#miform').show(); //muestro mediante id 
                         $('#formversion').hide(); //oculto mediante id 
@@ -113,7 +113,7 @@ return ok;*/
     else{ //si son iguales mando el alert e impido que un boludo ingrese dos veces el mismo atributo
         alert('El atributo que intenta agregar, ya existe en el formulario.');
     }
-           
+        $("html, body").animate({scrollTop: 0}, 1000);    
     });
  
 }); 
@@ -186,7 +186,7 @@ function capitalize(s)//convierte minusculas a Mayusculas
    <a href="#" onclick="mostrarDiv()"> <button id="ocultar"  class="btn btn-primary btn-group-sm">Ocultar Tabla de Atributos</button></a>
    <a href="nuevaVersion.php" > <button id="ver"  class="btn btn-primary btn-group-sm">Nueva Version</button></a> 
    
-       <form id="miform" class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+   <form id="miform" class="form-horizontal"  method="post" enctype="multipart/form-data">
           <br> <table class="table-responsive" border="1">  
                <tr> 
                <td>Nombre y tipo Campo :</td>    

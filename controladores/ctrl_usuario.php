@@ -15,6 +15,14 @@ require_once ('./clases/dependencia.php');
 require_once ('./clases/datosPrecargados.php');
 require_once ('ctrl_dinamico.php');
 function ingresar(){
+        $form=new formulario();
+    $resultado=$form->traerFormularios();//obtengo todos los forms 
+    //"Esto lo hago en todas las funciones para que cabeza.tpl siempre tenga los forms"
+    if($resultado==null){
+//si no existen formularios ingresados, ingreso todos los formularios precargados
+              //con esto aseguro q los formularios y atributos se generen una sola ves
+              cargarDatosPaciente();}
+    
   error_reporting(0);
   $mensage="";
   $admin=new admin();

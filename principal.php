@@ -20,6 +20,7 @@
 </head>
 
 <body>
+  
  <font style="font-weight: bold;">  <div class="container-fluid" style="background: #fff; opacity: 0.8; height: 100%;">
    <?php include 'cabezal.php'; ?>
         <div class="row">
@@ -43,12 +44,12 @@ require_once ('./clases/datosPrecargados.php');
       $attr1=new atributo();
         if (is_null($cedula)){
      ?>   
-                    <input type="submit" value="<<Ingresar nuevo paciente>>" class="form-control btn btn-primary" onClick="window.location='formularios.php?nombre=paciente'">
+                    <input type="submit" value="<<Ingresar nuevo paciente>>" class="form-control btn btn-primary" onClick="window.location='muestroVersiones.php?nombre=paciente'">
                     
                     <h3><font style="color: #000;">Proyecto Final Estudios Medicos</h3>
                     <legend>Pacientes en Sistema</legend></font>
       <div class="form-group">
-    <label for="nombre" class="col-lg-2 control-label">Seleccione cedula del paciente con el cual va a trabajar </label>
+    <label for="nombre" class="col-lg-2 control-label">Seleccione cedula del paciente con el cual va a trabajar o click en la LUPA arriba a la derecha</label>
     <div class="col-lg-10">
         <select id="elejir"><option>Seleccione una opcion</option>
            <?php 
@@ -60,13 +61,12 @@ require_once ('./clases/datosPrecargados.php');
               }
           }
           if(isset($usuarios)){
-              foreach ($usuarios as $key => $usuario) {
-                
-              
+              foreach ($usuarios as $key => $usuario) {  
            if($usuario->getId_attributo()==1){
+               if(strcmp($valor,$usuario->getValor())==0){}else{
               ?>
         <option value="<?php echo $usuario->getValor(); ?>"><?php echo $usuario->getValor(); ?></option>
-        <?php } }?>
+               <?php $valor=$usuario->getValor(); } }}?>
         
 
     <?php }?>
@@ -75,7 +75,7 @@ require_once ('./clases/datosPrecargados.php');
   </div>
         <?php }else{    
             ?>
-          <select id="elejir"> 
+          <select id="elejir1"> 
               <option value="<?php echo $cedula ?>">Ver avances</option>
               <option value="<?php echo $cedula ?>"><?php echo $cedula ?></option>
 
@@ -104,6 +104,20 @@ require_once ('./clases/datosPrecargados.php');
     }
      });     
     });  
+    
+    $('#elejir1').on('change', function(){
+              user=$('#elejir1').val();
+                datatypo='idtraers='+user;//genero un array con indice
+     $.ajax({
+         url: 'controlarAjax.php',//llamo a la pagina q hace el control
+         type:'POST',//metodo por el cual paso el dato
+         data:datatypo,
+             success: function (data) { //funcion q recoge la respuesta de la pagina q hace el control
+                  $("#respuestauser").fadeIn(1000).html(data); //imprimo el mensaje en el div      
+                
+    }
+     });     
+    }); 
     });
     </script>
 </body>

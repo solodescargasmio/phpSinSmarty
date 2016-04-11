@@ -22,10 +22,28 @@ class estudio_medico {
     private $tipo;
     private $valor;
     private $extencion;
-    function __construct() {
+    private $fecha_estudio;
+    private $numero;
+            function __construct() {
         
     }
-    public function getExtencion() {
+  
+    public function getFecha_estudio() {
+        return $this->fecha_estudio;
+    }
+
+    public function getNumero() {
+        return $this->numero;
+    }
+    public function setFecha_estudio($fecha_estudio) {
+        $this->fecha_estudio = $fecha_estudio;
+    }
+
+    public function setNumero($numero) {
+        $this->numero = $numero;
+    }
+
+        public function getExtencion() {
         return $this->extencion;
     }
 
@@ -92,16 +110,23 @@ class estudio_medico {
 
        public function ingresarEstudio(){ 
            $id_paciente= $this->getId_usuario();
+           $fecha=date('Y-m-d');
+           $con=$this->contarEstudiosPaciente();
+           if($con==0){
+               $numero=1;
+           }else{
+           $numero=$con+1;    
+           }
      $conexion=conectar::realizarConexion();
-      $smtp=$conexion->prepare("INSERT INTO estudio_paciente (id_paciente) VALUES (?)" );
-       $smtp->bind_param("i",$id_paciente);
+      $smtp=$conexion->prepare("INSERT INTO estudio_paciente (id_paciente,fecha_estudio,numero) VALUES (?,?,?)" );
+       $smtp->bind_param("isi",$id_paciente,$fecha,$numero);
        $smtp->execute();
        $res=false;
        if($conexion->affected_rows>0){
        $res=true;
        }
     if($res){
-              $resultado=$conexion->query("SELECT id_estudio FROM estudio_paciente WHERE id_paciente=".$id_paciente);   
+              $resultado=$conexion->query("SELECT id_estudio FROM estudio_paciente WHERE id_paciente=".$id_paciente." AND fecha_estudio='".$fecha."'");   
  while ($fila=$resultado->fetch_object()) {
          $dato=$fila->id_estudio;             
 }      
@@ -144,8 +169,7 @@ public function ingresarEstudioForm(){
       $resultado=$conexion->query("SELECT * FROM estudio_atributo WHERE id_estudio=".$id_estudio." AND id_form=".$id_form);   
  while ($fila=$resultado->fetch_object()) {
          $atr=new atributo();
-         $estudio=new estudio_medico();
-         
+         $estudio=new estudio_medico();   
          $estudio->setId_estudio($fila->id_estudio);
          $estudio->setId_form($fila->id_form);
          $estudio->setId_attributo($fila->id_attributo);
@@ -161,6 +185,7 @@ public function ingresarEstudioForm(){
  }
  
   public function traerFormId_usuario($id_paciente,$id_form) {
+      $estudios=null;
      $conexion=conectar::realizarConexion();
       $resultado=$conexion->query("SELECT estudio_atributo.id_estudio,estudio_atributo.id_form,estudio_atributo.id_attributo,estudio_atributo.valor FROM estudio_atributo,estudio_paciente WHERE estudio_paciente.id_estudio=estudio_atributo.id_estudio AND estudio_paciente.id_paciente=".$id_paciente." AND estudio_atributo.id_form=".$id_form);   
  while ($fila=$resultado->fetch_object()) {
@@ -188,9 +213,27 @@ public function ingresarEstudioForm(){
       return $estudios;
  }
  
- public function traerId($id_paciente) {   
+ 
+  public function traerCedulas(){ 
+      var_dump("traerCedulas");
+     $id_form=1;
      $conexion=conectar::realizarConexion();
-      $resultado=$conexion->query("SELECT id_estudio FROM estudio_paciente WHERE id_paciente=".$id_paciente);   
+      $resultado=$conexion->query("SELECT DISTINCT valor FROM estudio_atributo WHERE id_form=1 AND id_attributo=1");   
+while ($fila=$resultado->fetch_object()) {
+         $estudio=new estudio_medico();
+         $estudio->setId_attributo($fila->id_attributo);
+         $estudio->setValor($fila->valor);  
+         $estudios[]=$estudio;
+} mysqli_close($conexion);
+var_dump($estudios);exit();
+      return $estudios;
+ }
+ /**/
+ 
+ 
+ public function traerId($id_paciente,$num) {   
+     $conexion=conectar::realizarConexion();
+      $resultado=$conexion->query("SELECT id_estudio FROM estudio_paciente WHERE id_paciente=".$id_paciente." AND numero=".$num);   
  while ($fila=$resultado->fetch_object()) {
 
          $dato=$fila->id_estudio;
@@ -199,14 +242,41 @@ public function ingresarEstudioForm(){
         return $dato;
  } 
  
- public function traerFormEchos($id_paciente){
-     
+ public function traerIdMas($id_paciente) {   
      $conexion=conectar::realizarConexion();
-      $resultado=$conexion->query("SELECT DISTINCT id_form FROM estudio_atributo,estudio_paciente WHERE estudio_atributo.id_estudio=estudio_paciente.id_estudio AND estudio_paciente.id_paciente=".$id_paciente);   
+      $resultado=$conexion->query("SELECT id_estudio FROM estudio_paciente WHERE id_paciente=".$id_paciente);   
+ while ($fila=$resultado->fetch_object()) {
+         $arr[]=$fila->id_estudio;
+} mysqli_close($conexion);
+        return $arr;
+ }
+ 
+ public function traerFormEchos($id_paciente){  
+     $conexion=conectar::realizarConexion();
+      $resultado=$conexion->query("SELECT DISTINCT estudio_atributo.id_form FROM estudio_atributo,estudio_paciente WHERE estudio_atributo.id_estudio=estudio_paciente.id_estudio AND estudio_paciente.id_paciente=".$id_paciente);   
  while ($fila=$resultado->fetch_object()) {   
          $estudios[]=$fila->id_form;
           } mysqli_close($conexion);
-          
+        //  var_dump($estudios);exit();
+        return $estudios;
+ }
+  public function traerFormEchosXestudios($id_paciente,$id_estudio){  
+     $conexion=conectar::realizarConexion();
+      $resultado=$conexion->query("SELECT DISTINCT estudio_atributo.id_form FROM estudio_atributo,estudio_paciente WHERE estudio_atributo.id_estudio=estudio_paciente.id_estudio AND estudio_paciente.id_paciente=".$id_paciente." AND estudio_paciente.id_estudio=".$id_estudio);   
+ while ($fila=$resultado->fetch_object()) {   
+         $estudios[]=$fila->id_form;
+          } mysqli_close($conexion);
+        //  var_dump($estudios);exit();
+        return $estudios;
+ }
+ 
+ public function traerFormEchosIdEstudios($id_paciente,$id_estudio){  
+     $conexion=conectar::realizarConexion();
+      $resultado=$conexion->query("SELECT DISTINCT estudio_atributo.id_form FROM estudio_atributo,estudio_paciente WHERE estudio_atributo.id_estudio=estudio_paciente.id_estudio AND estudio_paciente.id_paciente=".$id_paciente." AND estudio_paciente.numero=".$id_estudio);   
+ while ($fila=$resultado->fetch_object()) {   
+         $estudios[]=$fila->id_form;
+          } mysqli_close($conexion);
+        //  var_dump($estudios);exit();
         return $estudios;
  }
  
@@ -265,5 +335,74 @@ if(strcmp($nomb,$nombre)==0){
     } mysqli_close($conexion);
         return $ok;
  }
+ 
+ public function okMas($id_paciente,$id_form,$num){
+     $form=new formulario();
+     $nombre=$form->traerNombre($id_form);
+     $ok=false;
+     $conexion=conectar::realizarConexion();
+      $resultado=$conexion->query("SELECT DISTINCT id_form FROM estudio_atributo,estudio_paciente WHERE estudio_paciente.id_paciente=".$id_paciente." AND estudio_atributo.id_estudio=estudio_paciente.id_estudio AND estudio_paciente.numero=".$num);   
+ while ($fila=$resultado->fetch_object()) { 
+     $nomb=$form->traerNombre($fila->id_form);
+if(strcmp($nomb,$nombre)==0){   
+         $ok=true;   
+        }
+    } mysqli_close($conexion);
+        return $ok;
+ }
 
+ public function nombreF($id_paciente,$id_form){
+     $form=new formulario();
+     $nombre=$form->traerNombre($id_form);
+     $ok=false;
+     $conexion=conectar::realizarConexion();
+      $resultado=$conexion->query("SELECT DISTINCT form.nombre FROM estudio_paciente,estudio_atributo,form WHERE estudio_atributo.id_form=form.id_form AND form.id_form=".$id_form." AND estudio_paciente.id_paciente=".$id_paciente);   
+ while ($fila=$resultado->fetch_object()) { 
+  if(isset($fila)){
+      $ok=true;
+  }
+    } mysqli_close($conexion);
+        return $ok;
+ }
+ 
+  public function contarEstudiosPaciente(){  
+     $dato=0;
+     $id_user=$this->getId_usuario();
+  $conexion= conectar::realizarConexion();
+         $resultado=$conexion->query("SELECT COUNT(*) FROM estudio_paciente WHERE id_paciente=".$id_user);       
+          while ($fila=$resultado->fetch_object()) {
+             
+              foreach ($fila as $value) {
+                  
+                 $dato=$value;
+              }
+        } mysqli_close($conexion);
+        return $dato;
+ }
+ 
+  public function traerEstudioMayor($id_paciente) {
+     $conexion=conectar::realizarConexion();
+      $resultado=$conexion->query("SELECT id_estudio FROM estudio_paciente WHERE id_paciente=$id_paciente order by id_estudio desc LIMIT 0,1");   
+ while ($fila=$resultado->fetch_object()) {
+         $dato=0;
+         $dato=$fila->id_estudio;
+
+} mysqli_close($conexion);
+        return $dato;
+ } 
+ 
+ 
+ public function traerNumero($id_estudio) {
+     $conexion=conectar::realizarConexion();
+      $resultado=$conexion->query("SELECT numero FROM estudio_paciente WHERE id_estudio=".$id_estudio);   
+ while ($fila=$resultado->fetch_object()) {
+         $dato=0;
+         $dato=$fila->numero;
+
+} mysqli_close($conexion);
+        return $dato;
+ } 
+
+ 
+ /*SELECT DISTINCT form.nombre FROM estudio_paciente,estudio_atributo,form WHERE estudio_atributo.id_form=form.id_form AND form.id_form=11 AND estudio_paciente.id_paciente=12345678*/
 }

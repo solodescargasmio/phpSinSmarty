@@ -22,6 +22,7 @@
 </head>
 
 <body>
+
     <?php include 'cabezal.php'; ?> 
      <div class="container-fluid" style="position: absolute;top: 25%;">
         <div id="respuestauser"></div>
@@ -39,12 +40,8 @@ $form=new formulario();
     $apell= Session::get('apellido');
     $edad=  Session::get('edad');
     $id_estudio= Session::get("estudio");
-    
      $operador=  Session::get("usuario");
-
        $mensage="";
-       
-        
         $atr=new atributo();
         $tabla=new tabla();
         
@@ -66,11 +63,10 @@ $form=new formulario();
        $value->setValor($nuevo);
           }    
             }
-           $estudios[]=$value;
+           $es[]=$value;
         }
   
-          } 
-        
+          }  
         ?>
    
        <?php if(is_null($cedula)){ ?>
@@ -84,7 +80,7 @@ $form=new formulario();
            
       <h2><legend><?php echo strtoupper($nombre); ?></legend></h2>
        
-    <?php    foreach ($estudios as $key => $estud){
+    <?php    foreach ($es as $estud){
             if(strcmp($estud->getTipo(),"file")==0){ ?>
            <div class="form-group" style="height: 15%; width: 30%;">
                 <label for="nombre" class="col-lg-2 control-label"><?php echo strtoupper($estud->getNom_attributo()); ?></label>
@@ -92,14 +88,14 @@ $form=new formulario();
    <?php  if((strcmp($estud->getExtencion(),"avi")==0)||(strcmp($estud->getExtencion(),"mp4")==0)||(strcmp($estud->getExtencion(),"wmv")==0)||(strcmp($estud->getExtencion(),"mkv")==0)||(strcmp($estud->getExtencion(),"3gp")==0)){  ?>             
  
             <video width="250" height="120" controls>
-  <source src="./multimedia/<?php echo $cedula; ?>/<?php echo $estud->getValor(); ?>" type="video/webm">
+  <source src="./multimedia/<?php echo $cedula; ?>/<?php echo $id_estudio; ?>/<?php echo $estud->getValor(); ?>" type="video/webm">
 Tu navegador no soporta este tipo de video.
 </video> 
    <?php }else if(strcmp($estud->getExtencion(),"png")==0){ ?>
-        <img src="./multimedia/<?php echo $cedula; ?>/<?php echo $estud->getValor(); ?>" width="200" height="100">
+        <img src="./multimedia/<?php echo $cedula; ?>/<?php echo $id_estudio; ?>/<?php echo $estud->getValor(); ?>" width="200" height="100">
        <?php } else { ?>
        Tu navegador no soporta la visualizacion de este tipo de archivo.   
-      <img src="./multimedia/<?php echo $cedula; ?>/<?php echo $estud->getValor(); ?>" width="200" height="100">  
+      <img src="./multimedia/<?php echo $cedula; ?>/<?php echo $id_estudio; ?>/<?php echo $estud->getValor(); ?>" width="200" height="100">  
            <?php } ?>
         <a class="btn btn-primary btn-lg btn-block" href="descargas.php?archivo=<?php echo $estud->getNom_attributo(); ?>& extension=<?php echo $estud->getExtencion(); ?>">Descargar</a>
          </div>

@@ -26,13 +26,15 @@ function principal(){
     $nick=  Session::get("nick");
    if($_GET['idpaciente']){//trabajar con este paciente
       $id_user=$_GET['idpaciente'];
+      $num=$_GET['num'];
+      $estudio=new estudio_medico();
+      $nume=$estudio->traerId($id_user, $num);
        $form=new formulario();
        $id_form=$form->traerId("paciente"); 
-       $estudio=new estudio_medico();
+       Session::set("estudio", $nume); 
+       Session::set("numero_estudio", $num);
        $estudios=$estudio->traerFormId_usuario($id_user, $id_form);
-       foreach ($estudios as $key => $value){
-           $ides=$value->getId_estudio();
-           Session::set("estudio", $ides); 
+       foreach ($estudios as $key => $value){   
            $attr1=new atributo();
            $nombat=$attr1->devolverNombre($value->getId_attributo());
            if(strcmp($nombat, "id_paciente")==0){
@@ -50,24 +52,7 @@ function principal(){
     $apell= Session::get('apellido');
     $edad=  Session::get('edad');
     $mensage="";
-    $form=new formulario();
-    $attr1=new atributo();
-    $estudio=new estudio_medico();
-    $estud=$estudio->traerPacientes(); 
-      if($estud!=null){
-          foreach ($estud as $keys => $values) {
-              $estudios[]=$values;//guardo todos los formularios dinamicos para mostrarlos en cabeza.tpl
-              }
-          }
-    $resultado=$form->traerFormularios();//obtengo todos los forms 
-    //"Esto lo hago en todas las funciones para que cabeza.tpl siempre tenga los forms"
-    if($resultado!=null){
-          foreach ($resultado as $key => $value) {
-         $formularios[]=$value;//guardo todos los formularios dinamicos para mostrarlos en cabeza.tpl
-              }        
-          }else{//si no existen formularios ingresados, ingreso todos los formularios precargados
-              //con esto aseguro q los formularios y atributos se generen una sola ves
-              cargarDatosPaciente();}
+
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -146,6 +131,7 @@ function ingresarAtributo() {
 ///////////////////////////////////////////////////////////////////////
 
     function crearFormulario() {
+     
         error_reporting(0);
         /*    'cantidad' => $con,
     'limite' => $lim,
@@ -167,15 +153,12 @@ $va=$_POST['nom_formulario'];
 $nombr=trim($va);
 $nombre=str_replace(' ','_',$nombr); 
         $form=new formulario();
-        $con=$form->traerCantidad($nombre);
-        foreach ($con as $value) {
-          $va=$value;  
-        }
-        if($va>0){
+        $form->setNombre($nombre);
+        $con=$form->traerCantidad(); 
+        if($con>0){
             $mensage="El formulario ya existe, ingrese una version nueva";
         }else{
         $version=1;
-        $form->setNombre($nombre);
         $form->setVersion($version);
         $idf=$form->insertarFormulario();//al guardar el form, obtengo al id del form
          $fo_att=new form_attr();
@@ -231,19 +214,19 @@ function nuevaVersion(){
         
         $nombre=trim($_POST['nom_formulario']);
         $form=new formulario();
-        $con=$form->traerCantidad($nombre);
-        foreach ($con as $value) {
-         $version=$value+1;   
-        }
-        
+        $form->setNombre($nombre);
+        $con=$form->traerCantidad();
+         $version=$con+1;    
                 $form->setNombre($nombre);
                 $form->setVersion($version);
                 $idf=$form->insertarFormulario();
                  $fo_att=new form_attr();
                 $fo_att->setId_form($idf); 
-        foreach ($dato as $key => $value){    
+              
+        foreach ($dato as $key => $value){  
+            
          if((strcmp($key, 'nom_formulario')==0)){ }
-         else{ 
+         else{  
                 $attr=new atributo();
                 $ida=$attr->devolverId($key);
                 $fo_att->setId_atributo($ida); 

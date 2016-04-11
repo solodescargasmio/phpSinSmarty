@@ -45,6 +45,8 @@ session_start();
              success: function (data) { //funcion q recoge la respuesta de la pagina q hace el control
                   $("#respuestauser").fadeIn(1000).html(data); //imprimo el mensaje en el div      
                 
+   $("#lupa").show();
+       $("#desplegar").hide();
     }
      });  
     /////////////////////////////////////////////////////////////   
@@ -58,8 +60,17 @@ session_start();
         });}else{ $('#suggestions').fadeOut(1000);
     }
     }); 
+    
+    $("#desplegar").hide();
   
 }); 
+$(function(){
+    $("#lupa").on('click',function(){
+        $("#lupa").hide();
+       $("#desplegar").show(); 
+    });
+});
+
    </script>
   <style>
 .suggest-element{
@@ -87,6 +98,7 @@ overflow: auto;
  <header class="navbar navbar-fixed-top navbar-inverse">
     <div class="container">
     <?php 
+    require_once ('./clases/estudio_medico.php');
   require_once ('./clases/atributo.php');
   require_once ('./clases/formulario.php');
   require_once ('./clases/form_attr.php');
@@ -115,7 +127,7 @@ overflow: auto;
       <a tabindex="-1" class="navbar-brand" href="manual.php">Manual del sitio</a>
      <?php }; ?>
        
-        <a tabindex="-1" class="navbar-brand" href="index.php">Ingreso</a>       
+        <a tabindex="-1" class="navbar-brand" href="cerrarSesion.php">Ingreso</a>       
         <?php
      if(isset($nick)){ ?>
         <a tabindex="-1" class="navbar-brand" href="principal.php">Pagina Principal</a> 
@@ -127,7 +139,6 @@ overflow: auto;
          $apell= Session::get('apellido');
     $edad=  Session::get('edad');     
         ?>
-        
            <div id="cuadrado" class="nav navbar-nav navbar-right">
     <font style="font-weight: bold;">        
         <font style="color: #fff;">
@@ -136,6 +147,9 @@ overflow: auto;
     <a tabindex="-1" class="navbar-brand" href="cerrar.php">Cambiar Paciente</a>
  </div>
    <?php }; ?>
+        <a href="#"><img src="imagenes/buscar.png" id="lupa" style="float: right; width: 8%;height: 8%;">
+        </a>
+        <div id="desplegar">
            <form class="navbar-form navbar-right">
         <div class="form-group">  
                          <div class="col-lg-10">
@@ -144,7 +158,7 @@ overflow: auto;
                           </div>        
   <div id="suggestions"><font style="color:white;"></font></div>
         </form>
- 
+ </div>
          <!--   <div style="float: right;" class="navbar-form navbar-right"><font style="color: #fff;">Apellido: {$apellido}<br>Cedula : {$cedula} <br>Edad : {$edad}</font></div>-->
 </div> <!-- .container -->
         <div class="navbar-collapse nav-collapse collapse navbar-header">
@@ -159,16 +173,24 @@ overflow: auto;
                $form=new formulario();
             $resultado=$form->traerFormularios();//obtengo todos los forms 
     //"Esto lo hago en todas las funciones para que cabeza.tpl siempre tenga los forms"
-    if($resultado!=null){
-          foreach ($resultado as $key => $value) {
-         $formularios[]=$value;//guardo todos los formularios dinamicos para mostrarlos en cabeza.tpl
-              }        
-          }   
-               
-          if($formularios){
-              foreach ($formularios as $key => $value) { ?>
-             <li class="dropdown">
-                 <a tabindex="-1" href="llenarFormularios.php?nombre=<?php echo $value->getNombre();?>"> <font style="font-weight: bold;"><?php echo strtoupper($value->getNombre());?></font></a>
+//    if($resultado!=null){
+//          foreach ($resultado as $key => $value) {
+//               var_dump($value->getNombre());
+//         $formularios[]=$value;//guardo todos los formularios dinamicos para mostrarlos en cabeza.tpl
+//              }        
+//          }   
+//         
+          if($resultado){
+              foreach ($resultado as $key => $value) {
+                  $dat=$value->traerCantidad(); ?>
+      <li class="dropdown">
+               <?php if($dat>1){
+                   ?>   
+     <a tabindex="-1" href="control.php?nombre=<?php echo $value->getNombre();?>"> <font style="font-weight: bold;"><?php echo strtoupper($value->getNombre());?></font></a>
+ <?php  }else{ ?> 
+   <a tabindex="-1" href="llenarFormularios.php?nombre=<?php echo $value->getNombre();?>&id_form=<?php echo $value->getId_form();?>"> <font style="font-weight: bold;"><?php echo strtoupper($value->getNombre());?></font></a>              
+                       <?php } ?>    
+               <!--  <a tabindex="-1" href="llenarFormularios.php?nombre=<?php echo $value->getNombre();?>"> <font style="font-weight: bold;"><?php echo strtoupper($value->getNombre());?></font></a>-->
          </li>       
          <?php      }   
           }
@@ -178,7 +200,7 @@ overflow: auto;
             </ul> 
         </li>
           <li class="dropdown">    
-           <a tabindex="-1" href="modifPerfil.php">Modificar Datos Perfil</a>
+           <a tabindex="-1" href="modifPerfil.php">Modificar Mi Perfil</a>
             </li>
             
          <!--   <li class="dropdown">    
@@ -191,7 +213,6 @@ overflow: auto;
            <ul class="dropdown-menu">
       <font style="font-weight: bold;"><li>
           <a tabindex="-1" href="crearFormularios.php">Crear Formularios</a></li>
-      <li><a tabindex="-1" href="probarPaginadoYborrar.php">Probar Paginado</a></li>
               <li><a tabindex="-1" href="version.php">Nueva Version Formulario</a></li>
               <li><a tabindex="-1" href="ingatributos.php">Crear Atributo</a></li>
               <li><a tabindex="-1" href="dependencia.php">Dependencia Formulario</a></li></font>
@@ -203,7 +224,7 @@ overflow: auto;
         
                <li class="dropdown">
             <a href="#" class="dropdown-toggle js-activated" data-toggle="dropdown">Ver Fichas<b class="caret"></b></a>
-           <ul class="dropdown-menu">
+           <ul class="dropdown-menu"><font style="font-weight: bold;">
          <li class="dropdown">   
      <a tabindex="-1" href="exportarExcel.php">Como tablas en EXCEL</a>
             </li>

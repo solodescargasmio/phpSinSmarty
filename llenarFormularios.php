@@ -39,7 +39,7 @@
          };
      $.datepicker.setDefaults($.datepicker.regional['es']);
     $(function () {
-    $(".datepicker").datepicker(
+    $("#datepicker").datepicker(
         {
         firstDay: 1,
         onSelect: function (date) {
@@ -63,7 +63,7 @@
                
           $('input[name=id_paciente]').attr('placeholder','Solo numeros, NO ingrese puntos(.), comas(,) o guiones(_-) EJ:123 ');
        
-               $(function(){
+     
 	//Aqui se coge el elemento y con la propiedad .on que requiere dos  parametros : change (cuando el valor de ese id cambie, que es cuando se elige otra opcion en la desplegable)y ejecutar la siguiente funcion cuando se haga change
 	$("#id_paciente").on('blur', function(){
             var id=$(this).val();
@@ -81,8 +81,7 @@
     });  
            //  datatypo='user='+user;//genero un array con indice
       
-    });        
-        
+
         }else{
         $('input[name=id_paciente]').attr('readonly','readonly');
         }
@@ -179,7 +178,6 @@ return edad;
 <body>
    <?php include 'cabezal.php';?>
     <div class="container-fluid" style="position: absolute;top: 25%;">
- 
         <div id="respuestauser"></div>
         <?php 
         error_reporting(0);
@@ -208,7 +206,7 @@ require_once ('./multimedia/guardarMultimedia.php');
         $tabla=new tabla();
         $form=new formulario();
       $nombre=trim($_GET['nombre']);
-      $idf=$form->traerId($nombre);
+      $idf=trim($_GET['id_form']);
 $ok=true;     
 // aca controlo las dependencias:///////////////////
       $depen=new dependencia();
@@ -230,34 +228,25 @@ $ok=true;
  //hasta aca controlo las dependencias:///////////////////       
          $fr_atr=new form_attr();
         $dat=$fr_atr->existenAtributos($idf);
- 
-        $nombre=trim($_GET['nombre']);
         $atr=new atributo();
         $tabla=new tabla();
-        $form=new formulario();
-        $idf=$form->traerId($nombre);
-        
+
         if($id_estudio){
         $estu=new estudio_medico();
-        $estudio=$estu->traerFormEstudioId($id_estudio, $idf);
-        foreach ($estudio as $key => $value) {
-           $estudios[]=$value;
+        $estudios=$estu->traerFormEstudioId($id_estudio, $idf);
+//        foreach ($estudi as $key => $value) {
+//           $estudios[]=$value;
+//        }
         }
-        }
-  
     if($dat>0){
         $resultado=$atr->traerAtributosForm($idf);
         $tablas=$tabla->traerTablas(); 
-        if($tablas!=null){
-          foreach ($tablas as $keys => $values) {
-             
-         $tablas[]=$values;
-          }}
         if($resultado==null){
           $mensage="No existen atributos para este formulario.<br> Ingrese una nueva version del formulario.";  
         }
            //
         }
+      
         
      if((is_null($cedula)) &&  (strcmp($nombre,"paciente")!=0)){ ?>
    <h4>
@@ -275,7 +264,8 @@ $ok=true;
            <button type="submit" class="btn btn-primary btn-lg btn-block" onclick="window.location='principal.php'">Atras</button>
     </div>
  <?php }
-     else if(!isset($estudios)){    
+     else if(!isset($estudios)){
+                
          ?>
         <form style="width: 500px;" role="form" method="POST" enctype="multipart/form-data" action="llenar.php">  
 <fieldset><legend><?php if(isset($nombre)){ echo strtoupper($nombre);} ?></legend></fieldset>
@@ -286,29 +276,33 @@ $ok=true;
                     <div class="form-group" style="border-width: 10px; background:#C8C0C0;">
     <label for="nombre" class="col-lg-2 control-label"><?php echo strtoupper($atributo->getNombre());?>:</label>
     <div class="col-lg-10">
-         <?php
+
+        
+        <?php
          if((strcmp($atributo->getTipo(),"double")==0)||(strcmp($atributo->getTipo(),"float")==0)){
-             if($atributo->getObligatorio()==0){?>
+             if($atributo->getObligatorio()==1){?>
              <input type="text" class="form-control" name="<?php echo $atributo->getNombre();?>" id="<?php echo $atributo->getNombre();?>" required="">      
              <?php }else{?>
               <input type="text" class="form-control" name="<?php echo $atributo->getNombre();?>" id="<?php echo $atributo->getNombre();?>">    
             <?php }
              }//fin (strcmp(atributo->getTipo(),"double")==0)||(strcmp(atributo->getTipo(),"float")==0
          else if(strcmp($atributo->getTipo(),"text")==0){
-             if($atributo->getTabla()==1){?>
+             if($atributo->getTabla()==1){
+                 ?>
               <select name="<?php echo $atributo->getNombre();?>">
-            <?php foreach ($tablas as $key => $opcion) {
+            <?php foreach ($tablas as $key => $opcion){
                     if($opcion->getId_atributo()==$atributo->getId_attributo()){?>
                   <option value="<?php echo $opcion->getOpcion();?>"><?php echo strtoupper($opcion->getOpcion());?></option>      
                     <?php }
                   } ?>
             </select>     
-           <?php  }else if($atributo->getObligatorio()==0){?>
+           <?php  }else if($atributo->getObligatorio()==1){?>
               <input type="text" class="form-control" name="<?php echo $atributo->getNombre();?>" id="<?php echo $atributo->getNombre();?>" required="">  
            <?php }else {?>
               <input type="text" class="form-control" name="<?php echo $atributo->getNombre();?>" id="<?php echo $atributo->getNombre();?>">  
            <?php }
          }else if(strcmp($atributo->getTipo(),"date")==0){
+           
              if($atributo->getObligatorio()=="0"){ ?>
             <input type="text" class="form-control" name="<?php echo $atributo->getNombre();?>" id="datepicker" required="">     
                  <?php }else{ ?>
@@ -318,23 +312,32 @@ $ok=true;
              if((strcmp($atributo->getNombre(),"id_paciente")==0)&&(strcmp($nombre,"paciente")!=0)){ ?>
         <input type="number" class="form-control" value="<?php echo $cedula;?>" name="<?php echo $atributo->getNombre();?>" id="<?php echo $atributo->getNombre();?>" readonly="">         
            <?php  }else
-               if($atributo->getObligatorio()==0){ ?>
+               if($atributo->getObligatorio()==1){ ?>
         <input type="number" class="form-control" name="<?php echo $atributo->getNombre();?>" id="<?php echo $atributo->getNombre();?>" required="">                  
                    <?php } else if(($atributo->getObligatorio()!=0)&&(strcmp($atributo->getNombre(),"id_paciente")!=0)&&(strcmp($nombre,"paciente")!=0)){ ?>
          <input type="number" class="form-control" name="<?php echo $atributo->getNombre();?>" id="<?php echo $atributo->getNombre();?>">               
                    <?php }
+                     else { ?>
+         <input type="number" class="form-control" name="<?php echo $atributo->getNombre();?>" id="<?php echo $atributo->getNombre();?>">               
+     <?php }
+        
+                   
      }else if(strcmp($atributo->getTipo(),"file")==0){
-         if($atributo->getObligatorio()==0){?>
+         if($atributo->getObligatorio()==1){?>
          <input type="<?php echo $atributo->getTipo();?>" class="form-control" name="archivo[]" id="<?php echo $atributo->getNombre();?>" required="">           
              <?php }else{?>
          <input type="<?php echo $atributo->getTipo();?>" class="form-control" name="archivo[]" id="<?php echo $atributo->getNombre();?>">        
                  <?php }
-     }else if($atributo->getObligatorio()==0){?>
+     }else if($atributo->getObligatorio()==1){?>
          <input type="<?php echo $atributo->getTipo();?>" class="form-control" name="<?php echo $atributo->getNombre();?>" id="<?php echo $atributo->getNombre();?>" required=""> 
          <?php }else{ ?>
        <input type="<?php echo $atributo->getTipo();?>" class="form-control" name="<?php echo $atributo->getNombre();?>" id="<?php echo $atributo->getNombre();?>">        
              <?php } 
-             ?>            
+             ?> 
+        
+        
+        
+        
     </div>
   </div>
      <?php } //fin foreach resultado as key => atributo
@@ -350,17 +353,18 @@ $ok=true;
  <?php }else{ ?>            
  <form style="width: 500px;" role="form" method="POST" enctype="multipart/form-data">   
             <fieldset><legend><?php echo strtoupper($nombre); ?></legend></fieldset>
-        <?php foreach ($estudios as $key => $estudio) { ?>
+        <?php foreach ($estudios as $keys => $estudio) {
+  ?>
             <input type="text" name="nomformulario" value="<?php echo $nombre; ?>" id="nomformulario" hidden="">
            <div class="form-group" style="border-width: 10px; background: #C8C0C0;">
                <label for="nombre" class="col-lg-2 control-label"><?php echo strtoupper($estudio->getNom_attributo()); ?></label>
     <div class="col-lg-offset-2 col-lg-10">
         <?php  if((strcmp($estudio->getNom_attributo(),"fecha_nacimiento")==0)||(strcmp($estudio->getNom_attributo(),"id_paciente")==0)||(strcmp($estudio->getNom_attributo(),"fecha_estudio")==0)||(strcmp($estudio->getNom_attributo(),"edad")==0)){ ?>
-        <input type="text" value="<?php echo $estudio->getValor(); ?>" name="<?php echo $estudio->getNom_attributo(); ?>" readonly="">        
+        <input type="text" class="form-control" value="<?php echo $estudio->getValor(); ?>" name="<?php echo $estudio->getNom_attributo(); ?>" readonly="">        
        <?php }else if((strcmp($estudio->getTipo(),"float")==0)||(strcmp($estudio->getTipo(),"double")==0)||(strcmp($estudio->getTipo(),"int")==0)){ ?>
-       <input type="text" value="<?php echo $estudio->getValor(); ?>" name="<?php echo $estudio->getNom_attributo(); ?>" readonly="">      
+       <input type="text" class="form-control" value="<?php echo $estudio->getValor(); ?>" name="<?php echo $estudio->getNom_attributo(); ?>" readonly="">      
            <?php }else { ?>
-       <input type="<?php echo $estudio->getTipo(); ?>" value="<?php echo $estudio->getValor(); ?>" name="<?php echo $estudio->getNom_attributo(); ?>">        
+       <input type="<?php echo $estudio->getTipo(); ?>" class="form-control" value="<?php echo $estudio->getValor(); ?>" name="<?php echo $estudio->getNom_attributo(); ?>">        
                <?php } ?>
         </div>
   </div>
@@ -368,7 +372,7 @@ $ok=true;
             <div class="form-group">
     <div class="col-lg-offset-2 col-lg-10">
        <input type="submit" name="modificar" class="btn btn-primary btn-lg btn-block" value="Guardar Modificaciones">
-       <br> <a href="ingresar.php" >   <button type="button" class="btn btn-primary btn-lg btn-block" onclick="window.location:'ingresar.php'">Cancelar Modificacion</button> </a>
+       <br> <a href="principal.php" >   <button type="button" class="btn btn-primary btn-lg btn-block" onclick="window.location:'ingresar.php'">Cancelar Modificacion</button> </a>
     </div>
   </div> 
         </form>

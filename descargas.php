@@ -8,9 +8,10 @@
 require_once ('./clases/session.php');
    Session::init();
     $id_user=Session::get('cedula');
+    $id_estudio=Session::get('estudio');
     $archivo=$_GET['archivo'];
     $extencion=$_GET['extension'];
-    $ruta = './multimedia/'.$id_user.'/'.$archivo.'.'.$extencion;
+    $ruta = './multimedia/'.$id_user.'/'.$id_estudio.'/'.$archivo.'.'.$extencion;
 if (is_file($ruta))
 {
    header('Content-Type: application/force-download');

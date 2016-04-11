@@ -55,9 +55,10 @@ return ok;*/
     </script>
     </head>
     <body>
+
         <?php include 'cabezal.php'; ?>
     <div class="container-fluid" style="position: absolute;top: 25%;">
-      
+      <h3>Ingresar Atributos</h3>
             <a href="#" onclick="mostrarDiv()" id="att"> <button id="mostrar"  class="btn btn-primary btn-group-sm">Atributo Simple</button></a>
    <a href="#" onclick="mostrarDiv()" id="att1"> <button id="ocultar"  class="btn btn-primary btn-group-sm">Atributo Compuesto </button></a>
    

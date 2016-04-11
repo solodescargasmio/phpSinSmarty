@@ -43,6 +43,7 @@
 </head>
 
 <body>
+ 
     <?php include 'cabezal.php';?>
     <div class="container-fluid" style="position: absolute;top: 25%;">
    <?php
@@ -56,7 +57,6 @@
             <div class="modal-dialog">
               <div class="modal-content">
                   <div class="modal-header">
-             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                   <h4><font style="color: blue;">Ingrese datos de usuario</font></h4>  
                   <div id="respuestanick"></div>
                   </div>

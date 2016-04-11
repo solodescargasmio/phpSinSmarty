@@ -190,7 +190,9 @@ public function ingresarAtributo(){
      $conexion=conectar::realizarConexion();
       $resultado=$conexion->query("SELECT COUNT(*) FROM atributo");   
   while ($fila=$resultado->fetch_object()) {
-         $dato=$fila;
+       foreach ($fila as $value) {          
+                 $dato=$value;
+              }
         } mysqli_close($conexion);
         return $dato;
  }

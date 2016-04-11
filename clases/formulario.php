@@ -65,6 +65,7 @@ class formulario {
         if($conexion->affected_rows>0){
             $res=true;
         }
+        
         if($res){
          $resultado=$conexion->query("SELECT id_form FROM form WHERE nombre='".$nombre."' AND version='".$version."' AND fecha_crea='".$fecha."'");       
           while ($fila=$resultado->fetch_object()) {
@@ -76,8 +77,7 @@ class formulario {
         }
  }
 
-  public function traerFormularios() { 
-      
+  public function traerFormularios(){ 
      $conexion=conectar::realizarConexion();
       $resultado=$conexion->query("SELECT DISTINCT * FROM form group by nombre");   
  while ($fila=$resultado->fetch_object()) {
@@ -136,14 +136,37 @@ class formulario {
         return $dato;
  }
  /**/
- public function traerCantidad($id_form){  
+ public function traerCantidad(){  
      $dato=0;
+     $id_form=$this->getNombre();
   $conexion= conectar::realizarConexion();
          $resultado=$conexion->query("SELECT COUNT(*) FROM form WHERE nombre='".$id_form."'");       
           while ($fila=$resultado->fetch_object()) {
-         $dato=$fila;
+             
+              foreach ($fila as $value) {
+                  
+                 $dato=$value;
+              }
         } mysqli_close($conexion);
         return $dato;
+ }
+ 
+ 
+ public function traerFormulariosNombre() {
+      $nombre=trim($this->getNombre());  
+     $conexion=conectar::realizarConexion();
+      $resultado=$conexion->query("SELECT * FROM form WHERE nombre='".$nombre."'");   
+       while ($fila=$resultado->fetch_object()){
+         $form=new formulario();
+         $form->setId_form($fila->id_form);
+         $form->setNombre($fila->nombre);
+         $form->setVersion($fila->version);
+         $form->setFecha_crea($fila->fecha_crea);
+         $formularios[]=$form;
+               
+} mysqli_close($conexion);
+
+        return $formularios;
  }
  
  

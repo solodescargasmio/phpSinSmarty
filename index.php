@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
     <meta charset="utf-8">
@@ -48,7 +47,7 @@
    <?php include 'cabezal.php'; ?>
     <div class="container-fluid">
         <div class="marco">
-            <h3>Bienvenido a Estudios Medicos o algo de eso</h3>
+            <h3>Bienvenido a Estudios Medicos (TIPay)</h3>
             <img class="imgprincipal" src="./imagenes/header.jpg" alt="Imagen de la universidad">
        
                <?php

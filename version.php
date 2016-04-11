@@ -30,7 +30,7 @@ $(document).ready(function(){
 		$("#mostrar").on( "click", function() {
                     dat=document.getElementById("nom_formulario").value;
     if(dat==""){
-        alert("POr favor elija un formulario de la tabla");
+        alert("Elija un formulario de la tabla. Gracias");
         }else {
 			$('#miform').show(); //muestro mediante id 
                         $('#formversion').hide(); //oculto mediante id 
@@ -80,7 +80,7 @@ $(document).ready(function(){
     else{ //si son iguales mando el alert e impido que un boludo ingrese dos veces el mismo atributo
         alert('El atributo que intenta agregar, ya existe en el formulario.');
     }
-           
+       $("html, body").animate({scrollTop: 0}, 1000);     
     });
  
 }); 
@@ -220,6 +220,7 @@ function capitalize(s)//convierte minusculas a Mayusculas
       <h6><font style="color: red;">Para eliminar atributo agregado,<br> doble click sobre el boton |-| al costado de cada atributo</font> </h6>
       
      <?php
+error_reporting(0);
    $mensage=$_GET['mensage'];
    if(isset($mensage)){ ?>
       <font style="color: red;font-weight: bold;"><?php echo $mensage;?></font> 
@@ -231,6 +232,5 @@ function capitalize(s)//convierte minusculas a Mayusculas
       <form id="my-dynamic-form" method="POST" action="nuevaVersion.php" onsubmit="return validarFormulario()"> 
       </form>
        </div> 
-         
 </body>
 </html>

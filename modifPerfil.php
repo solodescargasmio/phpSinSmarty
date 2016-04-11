@@ -24,6 +24,7 @@
 </head>
 
 <body>
+
     <?php include 'cabezal.php'; ?>
     <div class="container-fluid" style="position: absolute;top: 120px;">
             <?php

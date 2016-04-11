@@ -32,7 +32,8 @@ $form=$formula->traerFormularioId();
         $resultado=$attr->traerAtributosForm($form->getId_form());
         foreach ($resultado as $value) {      
       echo '<div class="form-group" id="'.$value->getNombre().'">';
-       echo '<label  class="col-sm-8 control-label">'.strtoupper($value->getNombre()).' v('.$form->getVersion().')</label>';
+      echo '<label  class="col-sm-8 control-label">'.strtoupper($value->getNombre()).'</label>';
+       echo '<spam"> version('.$form->getVersion().')</spam>';
        echo '<div class="col-lg-10">';
        echo '<input type="text" id="'.$value->getNombre().'" name="'.$value->getNombre().'" value="'.$value->getTipo().'" readonly=>';
         echo'<input type="button" id="'.$value->getNombre().'" value="-" style="color: red;" name="eliminar" ident="'.$value->getNombre().'" onclick="eliminarElementoDom()"></div></div>';
@@ -54,9 +55,18 @@ $form=$formula->traerFormularioId();
                  $formula=new formulario();
                  $resul=$formula->traerFormularios();
                  $estudio=new estudio_medico();
+                 $estudio->setId_usuario($id_paciente);
+                 $ca=$estudio->contarEstudiosPaciente();
+                  Session::init();
+                 $cedu=Session::get('cedula');
+                 $id_estudio=Session::get('estudio');
+                 $num=0;
+                 if($ca==1){
                 $estudios=$estudio->traerFormEchos($id_paciente);
                 $tam=count($resul);
-          echo '<table class="table table-condensed" border="1"><tr class="success">';
+          echo '<table class="table table-condensed" border="1">'
+                . '<tr class="danger"><td> Estudio Nº : '.$ca.'</td></tr>'
+                  . '<tr class="success">';
           foreach ($resul as $key => $value) {
          echo '<td>'.strtoupper($value->getNombre()).'</td>';     
          }        
@@ -64,9 +74,47 @@ $form=$formula->traerFormularioId();
                 echo '<tr>';
        if($estudios!=null){
           foreach ($resul as $key => $value){
-             if($estudio->ok($id_paciente, $value->getId_form())){
-                  Session::init();
-                 $cedu=Session::get('cedula');
+             if($estudio->ok($id_paciente, $value->getId_form())){            
+                 if($cedu!=null){
+              echo '<td><a href="verFormulario.php?nombre='.$value->getNombre().'"><img src="./imagenes/si.png"/></a></td>';        
+                 }else{
+                     echo '<td><img src="./imagenes/si.png"/></td>';
+                 }
+   
+             }else{  
+                   echo '<td><img src="./imagenes/no.png" /></td>';
+       }
+         }        
+     }
+     echo '<tr>';
+   
+         echo '</tr>'; 
+         echo '</table>';             
+                 if($cedu!=null){}else{
+         echo '<input type="submit" value="<<Trabajar con este paciente (Estudio Nº '.$ca.')>>" class="form-control btn btn-primary" onClick=window.location="ingresar.php?idpaciente='.$id_paciente.'&num='.$ca.'">';   
+              echo '<br><br>';    }
+           
+                 
+                 
+                 
+                 
+                 }else{//  si hay mas de un estudio
+    ///////////////////////////////////////////////////////////////////////////////////         
+             for($i=0;$i<$ca;$i++){ 
+                 $num=$i+1;
+                $estudios=$estudio->traerFormEchosIdEstudios($id_paciente, $num);
+          echo '<table class="table table-condensed" border="1">'
+                . '<tr class="danger"><td> Estudio Nº : '.$num.'</td></tr>'
+                  . '<tr class="success">';
+          foreach ($resul as $key => $value) {
+         echo '<td>'.strtoupper($value->getNombre()).'</td>';     
+         }        
+  echo '</tr>';
+                echo '<tr>';
+       if($estudios!=null){
+          foreach ($resul as $key => $value){
+             if($estudio->okMas($id_paciente, $value->getId_form(),$num)){
+                 
                 
                  if($cedu!=null){
               echo '<td><a href="verFormulario.php?nombre='.$value->getNombre().'"><img src="./imagenes/si.png"/></a></td>';        
@@ -84,8 +132,55 @@ $form=$formula->traerFormularioId();
          echo '</tr>'; 
          echo '</table>';             
                  if($cedu!=null){}else{
-         echo '<input type="submit" value="<<Trabajar con este paciente>>" class="form-control btn btn-primary" onClick=window.location="ingresar.php?idpaciente='.$id_paciente.'">';   
-                 } }else
+         echo '<input type="submit" value="<<Trabajar con este paciente (Estudio Nº '.$num.')>>" class="form-control btn btn-primary" onClick=window.location="ingresar.php?idpaciente='.$id_paciente.'&num='.$num.'">';   
+         echo '<br><br>';   }
+               } 
+ ///////////////////////////////////////////////////////////////////////////////////                
+            } //fin if else ca>1
+            echo '<input type="submit" value="<<Crear un NUEVO ESTUDIO para este paciente Cedula: '.$id_paciente.'>>" class="form-control btn btn-primary" onClick=window.location="crearestudio.php?idpaciente='.$id_paciente.'">'; 
+              
+                 }else
+            if($_POST['idtraers']){
+                $id_paciente=$_POST['idtraers'];
+                 $attr=new atributo();
+                 $formula=new formulario();
+                 $resul=$formula->traerFormularios();
+                 $estudio=new estudio_medico();
+                 $estudio->setId_usuario($id_paciente);
+                 $ca=$estudio->contarEstudiosPaciente();
+                  Session::init();
+                 $id_estudio=Session::get('estudio');
+                  $num=Session::get('numero_estudio');
+                $estudios=$estudio->traerFormEchosXestudios($id_paciente,$id_estudio);
+                $tam=count($resul);
+          echo '<table class="table table-condensed" border="1">'
+                . '<tr class="danger"><td> Estudio Nº : '.$num.'</td></tr>'
+                  . '<tr class="success">';
+          foreach ($resul as $key => $value) {
+         echo '<td>'.strtoupper($value->getNombre()).'</td>';     
+         }        
+  echo '</tr>';
+                echo '<tr>';
+       if($estudios!=null){
+          foreach ($resul as $key => $value){
+             if($estudio->okMas($id_paciente, $value->getId_form(),$num)){            
+              echo '<td><a href="verFormulario.php?nombre='.$value->getNombre().'"><img src="./imagenes/si.png"/></a></td>';        
+             }else{  
+                   echo '<td><img src="./imagenes/no.png" /></td>';
+       }
+         }        
+     }
+     echo '<tr>';
+   
+         echo '</tr>'; 
+         echo '</table>';             
+                 if($cedu!=null){}else{
+  echo '<br><br>';    }
+ 
+ ///////////////////////////////////////////////////////////////////////////////////                
+ 
+         echo '<input type="submit" value="<<Crear un NUEVO ESTUDIO para este paciente Cedula: '.$id_paciente.'>>" class="form-control btn btn-primary" onClick=window.location="crearestudio.php?idpaciente='.$id_paciente.'">';  
+                 }else
             if($_POST['admin']){
                 $id_paciente=$_POST['admin'];
                 $admin=new admin();
@@ -105,38 +200,7 @@ $form=$formula->traerFormularioId();
  echo '<img src="./imagenes/no.png"/><font style="color:red;font-weight: bold;"> El usuario ya existe en el sistema</font>';     
         }    
             }
-//              else
-//                if($_POST['inicio']){
-//                var_dump("dentro");exit();}
-//                else{
-//               $inicio=$_POST['inicio'];
-//              $atr=new atributo();
-//            $form=new formulario();
-//            $ca=$form->traerCantidad("ficha_patronimica");
-//            $con=$atr->contarAtributos();
-//            $total=0;
-//           $fin=5; 
-//            foreach ($con as $value) {
-//             $ca=$value;   
-//            }
-//            $id='';
-//            echo ' <br> <table class="table-responsive" border="1">  
-//                <tr>
-//                  <td>Nombre y tipo Campo:</td>
-//               </tr>';
-//            
-//            $atributos=$atr->traerAtributosPaginados($inicio,$fin);
-//            foreach ($atributos as $key => $value) {
-//                echo '<tr class="agregar">';
-//  echo'<td class=campo1><a style=cursor:pointer;><input type=text name=campo class=campo value='.$value->getNombre().' hidden=>'.$value->getNombre();
-//  echo '&nbsp;&nbsp;&nbsp; &nbsp;<input type="text" name="valor" class="valor" value='.$value->getTipo().' hidden="">'.$value->getTipo().'</a></td>';
-//  echo '</tr>';
-//}
-//$inicio=$inicio+$fin;
-//echo '<input type=text id=inicio value='.$inicio.'  hidden>';
-//echo '<a href="#"> <button  class="btn btn-primary btn-group-sm">Siguiente >></button></a>';
-//echo '</table>';        
-//}
+
      
             
  

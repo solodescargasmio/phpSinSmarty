@@ -5,14 +5,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+require_once ('admin.php');
 require_once ('atributo.php');
 require_once ('formulario.php');
 require_once ('form_attr.php');
+require_once ('tabla.php');
 require_once ('./conexion/conectar.php');
 require_once ('./conexion/configuracion.php');
+
  function cargarDatosPaciente() {
      $from_attr=new form_attr();
-        $formp=new formulario();     
+        $formp=new formulario();
+        $tabla=new tabla();
         $nombrep="paciente";
         $versionp="1.0";
         $attp1=new atributo();
@@ -32,7 +36,7 @@ require_once ('./conexion/configuracion.php');
         $id3=$attp3->ingresarAtributo();
         $attp4=new atributo();
         $attp4->setNombre("fecha_nac");
-        $attp4->setTipo("text");
+        $attp4->setTipo("date");
         $attp4->setCalculado(0);
         $id4=$attp4->ingresarAtributo();     
         $attp7=new atributo();
@@ -44,7 +48,13 @@ require_once ('./conexion/configuracion.php');
         $attp5->setNombre("sexo");
         $attp5->setTipo("text");
         $attp5->setCalculado(0);
+        $attp5->setTabla(1);
         $id5=$attp5->ingresarAtributo();
+        $tabla->setId_atributo($id5);
+        $tabla->setOpcion("femenino");
+        $tabla->ingresarTabla();
+        $tabla->setOpcion("masculino");
+        $tabla->ingresarTabla();
         $formp->setNombre($nombrep);
         $formp->setVersion($versionp);
       $idf=$formp->insertarFormulario();

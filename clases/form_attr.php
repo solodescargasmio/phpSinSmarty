@@ -96,5 +96,17 @@ return $res;
                       } mysqli_close($conexion);
 return $res;
         }
+        
+          public function traerFatributos() { 
+            $id_form=$this->getId_form();
+     $conexion=conectar::realizarConexion();
+      $resultado=$conexion->query("SELECT * FROM form_attr WHERE id_form=".$id_form);
+ while ($fila=$resultado->fetch_object()) {
+         $form_att=new form_attr();
+         $form_att->setId_atributo($fila->id_atributo);
+         $form_attis[]=$form_att;          
+} mysqli_close($conexion);
+        return $form_attis;
+ }
       
 }

@@ -32,6 +32,7 @@ and open the template in the editor.
  </script>
     </head>   
 <body>
+
   <?php include 'cabezal.php';?>
    <div id="menuses">
        <table border="1" class="table table-striped">

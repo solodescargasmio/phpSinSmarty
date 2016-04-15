@@ -76,12 +76,12 @@ Session::init();
                 
                      echo '<td>'.strtoupper($value->getNombre()).'</td>';
                      if($value->getId_form()==$id_fop){
-                                            echo '<td>No puede ser eliminado de forma individual. Elimine el estudio o el paciente</td>';        
+                                            echo '<td>No puede ser eliminado de forma individual. Elimine el estudio o al paciente</td>';        
  
                          
                      }else{
                      echo '<td><a href="elimino.php?form='.$value->getNombre().'">'
-                             . '<button class="btn btn-primary btn-lg btn-block" >Eliminar formulario</button></a></td>';        
+                             . '<button class="btn btn-primary btn-lg btn-block" >Eliminar '.strtoupper($value->getNombre()).'</button></a></td>';        
  }
              }
         echo '</tr>';

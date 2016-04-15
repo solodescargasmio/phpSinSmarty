@@ -231,8 +231,11 @@ overflow: auto;
              <li class="dropdown">    
      <a tabindex="-1" href="exportarExcel1.php">Como hojas en EXCEL</a>
             </li>
-           </ul>  
+            </font> </ul>  
         </li>
+           <li class="dropdown">    
+               <a tabindex="-1" href="eliminar.php">Eliminar</a>
+            </li>
  <?php } ?> 
         </ul>
         

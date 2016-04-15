@@ -342,11 +342,21 @@ if(strcmp($nomb,$nombre)==0){
      $ok=false;
      $conexion=conectar::realizarConexion();
       $resultado=$conexion->query("SELECT DISTINCT id_form FROM estudio_atributo,estudio_paciente WHERE estudio_paciente.id_paciente=".$id_paciente." AND estudio_atributo.id_estudio=estudio_paciente.id_estudio AND estudio_paciente.numero=".$num);   
- while ($fila=$resultado->fetch_object()) { 
+ while ($fila=$resultado->fetch_object()) {
      $nomb=$form->traerNombre($fila->id_form);
 if(strcmp($nomb,$nombre)==0){   
          $ok=true;   
         }
+    } mysqli_close($conexion);
+        return $ok;
+ }
+ 
+ public function traerIdFormEcho($nombre){
+     $ok="";
+     $conexion=conectar::realizarConexion();
+      $resultado=$conexion->query("SELECT form.id_form FROM form,estudio_atributo WHERE form.`id_form`=estudio_atributo.`id_form` AND form.`nombre`='".$nombre."'");   
+ while ($fila=$resultado->fetch_object()) {
+       $ok=$fila->id_form;
     } mysqli_close($conexion);
         return $ok;
  }
@@ -403,6 +413,58 @@ if(strcmp($nomb,$nombre)==0){
         return $dato;
  } 
 
- 
+  public function eliminarEstudio($id_estudio) {
+     $conexion=conectar::realizarConexion();
+      $smtp=$conexion->prepare("DELETE FROM estudio_paciente WHERE id_estudio=?");   
+$smtp->bind_param("i",$id_estudio);
+      $smtp->execute();
+      $res=false;
+       if($conexion->affected_rows>0){
+       $res=true;
+       } mysqli_close($conexion);
+       return $res;
+  }
+  
+  public function eliminarFormulario($nombre) {
+      $id_form=  $this->traerIdFormEcho($nombre);
+     $conexion=conectar::realizarConexion();
+      $smtp=$conexion->prepare("DELETE FROM estudio_atributo WHERE id_form=?");   
+$smtp->bind_param("i",$id_form);
+      $smtp->execute();
+      $res=false;
+       if($conexion->affected_rows>0){
+       $res=true;
+       } mysqli_close($conexion);
+       return $res;
+  }
+  
+  public function eliminarPaciente($id_paciente) {
+     $conexion=conectar::realizarConexion();
+      $smtp=$conexion->prepare("DELETE FROM estudio_paciente WHERE id_paciente=?");   
+$smtp->bind_param("i",$id_paciente);
+      $smtp->execute();
+      $res=false;
+       if($conexion->affected_rows>0){
+       $res=true;
+       } mysqli_close($conexion);
+       return $res;
+  }
+  
+//  public function dameNumero($id_paciente,$id_form,$num){
+//     $form=new formulario();
+//     $numero=0;
+//     $nombre=$form->traerNombre($id_form);
+//     $ok=false;
+//     $conexion=conectar::realizarConexion();
+//      $resultado=$conexion->query("SELECT DISTINCT id_form FROM estudio_atributo,estudio_paciente WHERE estudio_paciente.id_paciente=".$id_paciente." AND estudio_atributo.id_estudio=estudio_paciente.id_estudio AND estudio_paciente.numero=".$num);   
+// while ($fila=$resultado->fetch_object()) {
+//     $numero=$fila->id_form;
+//     $nomb=$form->traerNombre($fila->id_form);
+//if(strcmp($nomb,$nombre)==0){   
+//         $ok=true;   
+//        }
+//    } mysqli_close($conexion);
+//        return $numero;
+// }
  /*SELECT DISTINCT form.nombre FROM estudio_paciente,estudio_atributo,form WHERE estudio_atributo.id_form=form.id_form AND form.id_form=11 AND estudio_paciente.id_paciente=12345678*/
 }

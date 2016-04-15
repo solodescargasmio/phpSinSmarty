@@ -351,6 +351,8 @@ if($_POST['modificar']){
              crearDir($id_paciente);
              $id_estudio=$estudio->ingresarEstudio();
              Session::set("estudio", $id_estudio);
+             $num=$estudio->traerNumero($id_estudio);
+             Session::set("numero_estudio", $num);
          }
             
              $estudio->setId_estudio($id_estudio);
@@ -494,5 +496,62 @@ $nick=  Session::get("nick");
            $estudios[]=$value;
         }
         }
+}
+
+function eliminar(){
+    error_reporting(0);
+    Session::init();
+    $mensage="";
+    $estudio=new estudio_medico();
+    if($_GET['form']){
+        $nomb=$_GET['form'];
+        if($estudio->eliminarFormulario($nomb)){
+            $mensage="El formulario se elimino con exito";   
+        }else{
+          $mensage="Ocurrio un error al intentar eliminar el formulario, verifique";  
+        }
+    }else if($_GET['id_est']){
+        $id_estudio=$_GET['id_est'];
+        if($estudio->eliminarEstudio($id_estudio)){
+            cerrar();
+     
+            $mensage="El estudio se elimino con exito"; 
+        }else{
+          $mensage="Ocurrio un error al intentar eliminar el estudio, verifique";  
+        }
+    }else if($_GET['id_pac']){  
+        $id_paciente=$_GET['id_pac'];
+          if($estudio->eliminarPaciente($id_paciente)){
+              eliminarDirectorio($id_paciente);
+              cerrar();
+            $mensage="El paciente se elimino con exito"; 
+        }else{
+          $mensage="Ocurrio un error al intentar eliminar el paciente, verifique";  
+        } 
+    }else{
+        $mensage="La pagina no está disponible"; 
+    }
+   header('Location: principal.php?mensage='.$mensage); 
+    
+   
+}
+
+function eliminarDirectorio($carpeta)
+{
+    foreach(glob("./multimedia/".$carpeta . "/*") as $archivos_carpeta)
+    {
+        echo $archivos_carpeta;
+ 
+        if (is_dir($archivos_carpeta))
+        {
+            eliminarDir($archivos_carpeta);
+        }
+        else
+        {
+            unlink($archivos_carpeta);
+        }
+    }
+ 
+    rmdir($carpeta);
 }
 

@@ -73,15 +73,48 @@ require_once ('./clases/datosPrecargados.php');
         </select>
     </div>
   </div>
-        <?php }else{    
-            ?>
-          <select id="elejir1"> 
-              <option value="<?php echo $cedula ?>">Ver avances</option>
-              <option value="<?php echo $cedula ?>"><?php echo $cedula ?></option>
-
-        </select> 
-          
-       <?php } ?>
+        <?php }else{        
+     $id_paciente=$cedula;
+                 $attr=new atributo();
+                 $formula=new formulario();
+                 $resul=$formula->traerFormularios();
+                 $estudio=new estudio_medico();
+                 $estudio->setId_usuario($id_paciente);
+                 $ca=$estudio->contarEstudiosPaciente();
+                 $id_estudio=Session::get('estudio');
+                  $num=Session::get('numero_estudio');
+             
+                $estudios=$estudio->traerFormEchosXestudios($id_paciente,$id_estudio);
+                $tam=count($resul);
+          echo '<table class="table table-condensed" border="1">'
+                . '<tr class="danger"><td> Estudio Nº : '.$num.'</td></tr>'
+                  . '<tr class="success">';
+          foreach ($resul as $key => $value) {
+         echo '<td>'.strtoupper($value->getNombre()).'</td>';     
+         }        
+  echo '</tr>';
+                echo '<tr>';
+       if($estudios!=null){
+          foreach ($resul as $key => $value){
+             if($estudio->okMas($id_paciente, $value->getId_form(),$num)){            
+              echo '<td><a href="verFormulario.php?nombre='.$value->getNombre().'"><img src="./imagenes/si.png"/></a></td>';        
+             }else{  
+                   echo '<td><img src="./imagenes/no.png" /></td>';
+       }
+         }        
+     }
+     echo '<tr>';
+   
+         echo '</tr>'; 
+         echo '</table>';             
+                 if($cedu!=null){}else{
+  echo '<br><br>';    }
+ 
+ ///////////////////////////////////////////////////////////////////////////////////                
+ 
+         echo '<input type="submit" value="<<Crear un NUEVO ESTUDIO para este paciente Cedula: '.$id_paciente.'>>" class="form-control btn btn-primary" onClick=window.location="crearestudio.php?idpaciente='.$id_paciente.'">';  
+            
+       } ?>
         <div id="respuestauser"></div>
    </div>
    </div>
@@ -105,19 +138,19 @@ require_once ('./clases/datosPrecargados.php');
      });     
     });  
     
-    $('#elejir1').on('change', function(){
-              user=$('#elejir1').val();
-                datatypo='idtraers='+user;//genero un array con indice
-     $.ajax({
-         url: 'controlarAjax.php',//llamo a la pagina q hace el control
-         type:'POST',//metodo por el cual paso el dato
-         data:datatypo,
-             success: function (data) { //funcion q recoge la respuesta de la pagina q hace el control
-                  $("#respuestauser").fadeIn(1000).html(data); //imprimo el mensaje en el div      
-                
-    }
-     });     
-    }); 
+//    $('#elejir1').on('change', function(){
+//              user=$('#elejir1').val();
+//                datatypo='idtraers='+user;//genero un array con indice
+//     $.ajax({
+//         url: 'controlarAjax.php',//llamo a la pagina q hace el control
+//         type:'POST',//metodo por el cual paso el dato
+//         data:datatypo,
+//             success: function (data) { //funcion q recoge la respuesta de la pagina q hace el control
+//                  $("#respuestauser").fadeIn(1000).html(data); //imprimo el mensaje en el div      
+//                
+//    }
+//     });     
+//    }); 
     });
     </script>
 </body>

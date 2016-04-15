@@ -522,7 +522,7 @@ function eliminar(){
     }else if($_GET['id_pac']){  
         $id_paciente=$_GET['id_pac'];
           if($estudio->eliminarPaciente($id_paciente)){
-              eliminarDirectorio($id_paciente);
+            //  eliminarDirectorio($id_paciente);
               cerrar();
             $mensage="El paciente se elimino con exito"; 
         }else{
@@ -535,7 +535,21 @@ function eliminar(){
     
    
 }
+/*
 
+ * function deleteDirectory($dir) {//probar esta funcion
+    if(!$dh = @opendir($dir)) return;
+    while (false !== ($current = readdir($dh))) {
+        if($current != '.' && $current != '..') {
+            echo 'Se ha borrado el archivo '.$dir.'/'.$current.'<br/>';
+            if (!@unlink($dir.'/'.$current)) 
+                deleteDirectory($dir.'/'.$current);
+        }       
+    }
+    closedir($dh);
+    echo 'Se ha borrado el directorio '.$dir.'<br/>';
+    @rmdir($dir);
+} */
 function eliminarDirectorio($carpeta)
 {
     foreach(glob("./multimedia/".$carpeta . "/*") as $archivos_carpeta)

@@ -351,18 +351,18 @@ $ok=true;
         </form>    
     
  <?php }else{ ?>            
- <form style="width: 500px;" role="form" method="POST" enctype="multipart/form-data">   
+        <form style="width: 500px;" role="form" method="POST" enctype="multipart/form-data" action="llenar.php">   
             <fieldset><legend><?php echo strtoupper($nombre); ?></legend></fieldset>
         <?php foreach ($estudios as $keys => $estudio) {
   ?>
-            <input type="text" name="nomformulario" value="<?php echo $nombre; ?>" id="nomformulario" hidden="">
+            <input type="text" name="nomformulario" value="<?php echo $idf; ?>" id="nomformulario" hidden="">
            <div class="form-group" style="border-width: 10px; background: #C8C0C0;">
                <label for="nombre" class="col-lg-2 control-label"><?php echo strtoupper($estudio->getNom_attributo()); ?></label>
     <div class="col-lg-offset-2 col-lg-10">
         <?php  if((strcmp($estudio->getNom_attributo(),"fecha_nacimiento")==0)||(strcmp($estudio->getNom_attributo(),"id_paciente")==0)||(strcmp($estudio->getNom_attributo(),"fecha_estudio")==0)||(strcmp($estudio->getNom_attributo(),"edad")==0)){ ?>
         <input type="text" class="form-control" value="<?php echo $estudio->getValor(); ?>" name="<?php echo $estudio->getNom_attributo(); ?>" readonly="">        
        <?php }else if((strcmp($estudio->getTipo(),"float")==0)||(strcmp($estudio->getTipo(),"double")==0)||(strcmp($estudio->getTipo(),"int")==0)){ ?>
-       <input type="text" class="form-control" value="<?php echo $estudio->getValor(); ?>" name="<?php echo $estudio->getNom_attributo(); ?>" readonly="">      
+       <input type="text" class="form-control" value="<?php echo $estudio->getValor(); ?>" name="<?php echo $estudio->getNom_attributo(); ?>">      
            <?php }else { ?>
        <input type="<?php echo $estudio->getTipo(); ?>" class="form-control" value="<?php echo $estudio->getValor(); ?>" name="<?php echo $estudio->getNom_attributo(); ?>">        
                <?php } ?>

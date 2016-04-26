@@ -449,22 +449,4 @@ $smtp->bind_param("i",$id_paciente);
        } mysqli_close($conexion);
        return $res;
   }
-  
-//  public function dameNumero($id_paciente,$id_form,$num){
-//     $form=new formulario();
-//     $numero=0;
-//     $nombre=$form->traerNombre($id_form);
-//     $ok=false;
-//     $conexion=conectar::realizarConexion();
-//      $resultado=$conexion->query("SELECT DISTINCT id_form FROM estudio_atributo,estudio_paciente WHERE estudio_paciente.id_paciente=".$id_paciente." AND estudio_atributo.id_estudio=estudio_paciente.id_estudio AND estudio_paciente.numero=".$num);   
-// while ($fila=$resultado->fetch_object()) {
-//     $numero=$fila->id_form;
-//     $nomb=$form->traerNombre($fila->id_form);
-//if(strcmp($nomb,$nombre)==0){   
-//         $ok=true;   
-//        }
-//    } mysqli_close($conexion);
-//        return $numero;
-// }
- /*SELECT DISTINCT form.nombre FROM estudio_paciente,estudio_atributo,form WHERE estudio_atributo.id_form=form.id_form AND form.id_form=11 AND estudio_paciente.id_paciente=12345678*/
 }

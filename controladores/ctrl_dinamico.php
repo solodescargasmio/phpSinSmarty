@@ -9,7 +9,7 @@
 require_once ('./clases/atributo.php');
 require_once ('./clases/formulario.php');
 require_once ('./clases/form_attr.php');
-
+require_once ('./multimedia/eliminarArchivos.php');
 require_once ('./clases/session.php');
 require_once ('./clases/tabla.php');
 require_once ('./multimedia/guardarMultimedia.php');
@@ -308,6 +308,7 @@ function formularios(){
 if($_POST['modificar']){
              $estudio=new estudio_medico();
              $estudio->setId_usuario($id_user);
+             $idf=$_POST["nomformulario"];
              $estudio->setId_form($idf);
              $estudio->setId_estudio($id_estudio);
          if(strcmp($nomf, "paciente")==0){
@@ -329,6 +330,9 @@ if($_POST['modificar']){
                 }  
          }
         }
+        if(isset($_FILES)){
+            eliminarArchivo($idf);
+            }
         if($ok){//eliminar esto para que vuelva al mismo lugar
             $mensage="Los datos se modificaron de forma correcta.";
        header('Location: principal.php?mensage='.$mensage);
@@ -345,6 +349,7 @@ if($_POST['modificar']){
              $estudio->setId_usuario($id_paciente);
              $estudio->setId_form($idf);
          if(strcmp($nomf, "paciente")==0){
+             
              Session::set("cedula",$id_paciente);
              Session::set("apellido", $_POST['apellido']);
              Session::set("edad", $_POST['edad']);
@@ -501,11 +506,18 @@ $nick=  Session::get("nick");
 function eliminar(){
     error_reporting(0);
     Session::init();
+    $numero=Session::get('numero_estudio');
+    $id_user=Session::get("cedula");
     $mensage="";
     $estudio=new estudio_medico();
+    $estudio->setId_usuario($id_user);
+    $can=$estudio->contarEstudiosPaciente();
+
     if($_GET['form']){
         $nomb=$_GET['form'];
-        if($estudio->eliminarFormulario($nomb)){
+        $idf=$estudio->traerIdFormEcho($nomb);
+        if($estudio->eliminarFormulario($nomb)){ 
+            eliminarFormulario($idf);
             $mensage="El formulario se elimino con exito";   
         }else{
           $mensage="Ocurrio un error al intentar eliminar el formulario, verifique";  
@@ -513,17 +525,24 @@ function eliminar(){
     }else if($_GET['id_est']){
         $id_estudio=$_GET['id_est'];
         if($estudio->eliminarEstudio($id_estudio)){
+            if($can>1){ 
+                 $carpeta="./multimedia/".$id_user."/".$id_estudio;
+        eliminarDirectorio($carpeta);
+           }else{
+                $carpeta="./multimedia/".$id_user."/"; 
+        eliminarDirectorio($carpeta);
+           }
+           
             cerrar();
-     
             $mensage="El estudio se elimino con exito"; 
         }else{
           $mensage="Ocurrio un error al intentar eliminar el estudio, verifique";  
         }
     }else if($_GET['id_pac']){  
-        $id_paciente=$_GET['id_pac'];
+        $id_paciente=$_GET['id_pac']; 
           if($estudio->eliminarPaciente($id_paciente)){
-            //  eliminarDirectorio($id_paciente);
-              cerrar();
+           $carpeta="./multimedia/".$id_user."/"; 
+        eliminarDirectorio($carpeta);
             $mensage="El paciente se elimino con exito"; 
         }else{
           $mensage="Ocurrio un error al intentar eliminar el paciente, verifique";  
@@ -532,40 +551,4 @@ function eliminar(){
         $mensage="La pagina no está disponible"; 
     }
    header('Location: principal.php?mensage='.$mensage); 
-    
-   
 }
-/*
-
- * function deleteDirectory($dir) {//probar esta funcion
-    if(!$dh = @opendir($dir)) return;
-    while (false !== ($current = readdir($dh))) {
-        if($current != '.' && $current != '..') {
-            echo 'Se ha borrado el archivo '.$dir.'/'.$current.'<br/>';
-            if (!@unlink($dir.'/'.$current)) 
-                deleteDirectory($dir.'/'.$current);
-        }       
-    }
-    closedir($dh);
-    echo 'Se ha borrado el directorio '.$dir.'<br/>';
-    @rmdir($dir);
-} */
-function eliminarDirectorio($carpeta)
-{
-    foreach(glob("./multimedia/".$carpeta . "/*") as $archivos_carpeta)
-    {
-        echo $archivos_carpeta;
- 
-        if (is_dir($archivos_carpeta))
-        {
-            eliminarDir($archivos_carpeta);
-        }
-        else
-        {
-            unlink($archivos_carpeta);
-        }
-    }
- 
-    rmdir($carpeta);
-}
-

@@ -5,50 +5,101 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-require_once ('./controladores/ctrl_dinamico.php');
-require_once ('./clases/session.php');
-require_once ('./clases/archivo.php');
 require_once ('./clases/atributo.php');
 require_once ('./clases/estudio_medico.php');
-require_once ('./clases/formulario.php');
-require_once ('./clases/form_attr.php');
+require_once ('./clases/formulario.php');  
+require_once ('./clases/session.php');
 require_once ('./conexion/configuracion.php');
-require_once ('crearMKdir.php');
-function subirDatos($id){ 
-   // error_reporting(1);
- Session::init();
-             $id_user=Session::get("cedula");
-             $id_estudio= Session::get("estudio"); 
-             $numero=Session::get('numero_estudio');
-             $estudio=new estudio_medico();
-             $estudio->setId_estudio($id_estudio);
-             $estudio->setId_usuario($id_user);
-             $estudio->setId_form($id);
+function eliminarDirectorio($carpeta)
+{    
+    foreach(glob($carpeta."/*") as $archivos_carpeta)
+    {  
+        if (is_dir($archivos_carpeta))
+        {
+           
+            eliminarDirectorio($archivos_carpeta);
+        }
+        else
+        {
+  
+   unlink($archivos_carpeta);
+        }
+    }  
+    rmdir($carpeta);
+}
+
+function eliminarFormulario($idf){
+             Session::init();
+    $id_user=Session::get('cedula');
+    $id_estudio= Session::get("estudio");
+    $carpeta="./multimedia/".$id_user."/".$id_estudio;
+  $attr=new atributo();
+    $attribu=$attr->traerAtributosFormFile($idf);
+         foreach ($attribu as $key => $value) {
+           $nombre=$value->getNombre();       
+    foreach(glob($carpeta."/*") as $archivos_carpeta)
+    { 
+         
+        if (is_dir($archivos_carpeta))
+        { 
+        }
+        else
+        {
+     $exten=explode(".",$archivos_carpeta);
+            $nom=  explode("/", $exten[1]);
+            $nomb=end($nom);
+            
+            if(strcmp($nomb,$nombre)==0){ 
+         unlink($archivos_carpeta);
+            }
+        }
+    }exit();
  
- $attr=new atributo();
-    $attribu=$attr->traerAtributosFormFile($id);
-    
-    if($_FILES["archivo"]["name"]){   
-        for($i=0;$i<count($_FILES["archivo"]["name"]);$i++){
-     // var_dump($_FILES["archivo"]["name"][$i]);exit();
-          $conta=0;
-            foreach ($attribu as $key => $value) {
-                 $id_attributo=$value->getId_attributo(); 
-                if($i==$conta){
-                     if(strcmp($_FILES["archivo"]["name"][$i],"")!=0){
+}
+}
+
+
+
+
+function eliminarArchivo($idf){
+             Session::init();
+    $id_user=Session::get('cedula');
+    $id_estudio= Session::get("estudio");
+    $carpeta="./multimedia/".$id_user."/".$id_estudio;
+  $attr=new atributo();
+    $attribu=$attr->traerAtributosFormFile($idf);
+  
+         foreach ($attribu as $key => $value) {
+           $nombre=$value->getNombre();   
+       if(isset($_FILES[$nombre])){     
+    foreach(glob($carpeta."/*") as $archivos_carpeta)
+    { 
+         
+        if (is_dir($archivos_carpeta))
+        { 
+            eliminarA();
+        }
+        else
+        {
+     $exten=explode(".",$archivos_carpeta);
+            $nom=  explode("/", $exten[1]);
+            $nomb=end($nom);
+            if(strcmp($nomb,$nombre)==0){  
+         unlink($archivos_carpeta);
+            }
+        }
+    }
+ 
+}}
  
     $directorio = dirname(__FILE__).'/'.$id_user.'/'.$id_estudio;
-   
-if (!file_exists($directorio)) {
-    crearDir($id_user.'/'.$id_estudio);
-}
 
 $serv =dirname(__FILE__).'/'.$id_user.'/'.$id_estudio.'/';
 
-  $exten=explode(".",$_FILES['archivo']['name'][$i]);
+  $exten=explode(".",$_FILES[$nombre]['name']);
         $ex=end($exten);
-        $var=$value->getNombre().'.'.$ex;
-  //$ruta=$serv.$_FILES['archivo']['name'][$i];
+        $var=$nombre.'.'.$ex;
+  //$ruta=$serv.$_FILES[$nombre]['name'][$i];
       
   	// Primero creamos un ID de conexión a nuestro servidor
 	$cid = ftp_connect(FTP_HOST);
@@ -70,7 +121,7 @@ $serv =dirname(__FILE__).'/'.$id_user.'/'.$id_estudio.'/';
 	$local =$var;
         
 	// Este es el nombre temporal del archivo mientras dura la transmisión
-	$remoto = $_FILES["archivo"]["tmp_name"][$i];
+	$remoto = $_FILES[$nombre]["tmp_name"];
        
 	// Juntamos la ruta del servidor con el nombre real del archivo
 	$ruta = $serv.$local;
@@ -81,28 +132,28 @@ $serv =dirname(__FILE__).'/'.$id_user.'/'.$id_estudio.'/';
                        //guardamos nombre en base de datos        
                   if(strcasecmp($ex, "jpeg")==0){
             $newpng =$value->getNombre().'.png'; 
-             $png = imagepng(imagecreatefromjpeg($_FILES['archivo']['tmp_name'][$i]), $newpng);
+             $png = imagepng(imagecreatefromjpeg($_FILES[$nombre]['tmp_name']), $newpng);
              $ruta = $serv.$newpng;
              copy($remoto, $ruta);
              $ex="png";
                   }else
                     if(strcasecmp($ex, "jpg")==0){
                $newpng =$value->getNombre().'.png'; 
-             $png = imagepng(imagecreatefromjpeg($_FILES['archivo']['tmp_name'][$i]), $newpng);
+             $png = imagepng(imagecreatefromjpeg($_FILES[$nombre]['tmp_name']), $newpng);
              $ruta = $serv.$newpng;
              copy($remoto, $ruta);
              $ex="png";
                   }else
                    if(strcasecmp($ex, "gif")==0){
              $newpng =$value->getNombre().'.png'; 
-             $png = imagepng(imagecreatefromgif($_FILES['archivo']['tmp_name'][$i]), $newpng);
+             $png = imagepng(imagecreatefromgif($_FILES[$nombre]['tmp_name']), $newpng);
              $ruta = $serv.$newpng;
              copy($remoto, $ruta);
              $ex="png";    
              }else
                          if(strcasecmp($ex, "bmp")==0){
              $newpng =$value->getNombre().'.png'; 
-             $png = imagepng(imagecreatefromwbmp($_FILES['archivo']['tmp_name'][$i]), $newpng);
+             $png = imagepng(imagecreatefromwbmp($_FILES[$nombre]['tmp_name']), $newpng);
              $ruta = $serv.$png;
              copy($remoto, $ruta);
              $ex="png";           
@@ -128,12 +179,7 @@ $serv =dirname(__FILE__).'/'.$id_user.'/'.$id_estudio.'/';
 //                        $archivo->setNombre($varia);
 //                        $archivo->setExtension($ex);
 //                        //////////////////////////////////////////////////
-             $estudio->setId_attributo($id_attributo);
-             $estudio->setValor($newpng);
-//         
-                        if($estudio->ingresarEstudioForm()){}else{
-                            $mensaje="Error al guardar archivo, verifique";
-                        }
+
                     ///////////////////////////////////////////////////////  
 		}
 		// Sino se pudo subir el temporal
@@ -143,26 +189,7 @@ $serv =dirname(__FILE__).'/'.$id_user.'/'.$id_estudio.'/';
 	//}
 	//cerramos la conexión FTP
 	ftp_close($cid);
-  }else{
-          /////////////////////////////////////////            
-            $valor="";
-             $estudio->setId_attributo($id_attributo);
-             $estudio->setValor($valor);
-            // var_dump($estudio);
-              if($estudio->ingresarEstudioForm()){}else{
-                            $mensaje="Error al guardar archivo, verifique";
-                        }
-         ////////////////////////////////////////    
-  }//fin else if(strcmp($_FILES["archivo"]["name"][$i],"")!=0) 
-                  }//fin if($conta==$i)
-     
-      $conta ++;   }//fin foreach ($attribu as $key => $value)
-     
-           }//for($i=0;$i<count($_FILES["archivo"]["name"]);$i++)
-  
-        }//fin if ($_FILES["archivo"]["name"])  
-//$archivos=$archivo->listarArchivos($id_user);
-//$imagen=$archivo->mostrarArchivo($id_user,$_POST['cursos']);
-                 //}
-                
-                } 
+        
+                }
+
+

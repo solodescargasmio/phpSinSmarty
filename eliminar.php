@@ -15,6 +15,15 @@ and open the template in the editor.
     <script src="./js/bootstrap.min.js"></script>
     <script src="./js/jquery.min.js"></script>
     <script src="./js/dateFechamio.js"></script>
+    <script type="text/javascript"> 
+function confirmar(){ 
+confirmado=confirm("¿Seguro que desea eliminarlo?"); 
+if (confirmado) 
+return true;
+else 
+return false;
+} 
+</script>
     </head>
     <body>
          <?php include 'cabezal.php';?>
@@ -37,16 +46,20 @@ Session::init();
      ?> 
             <p>Si elimina el Estudio Nº :<font style="color: red;"><?php echo $numero; ?></font> del paciente con cedula <font style="color: red;"><?php echo $cedula; ?></font>, toda la informacion <br>
         de este paciente, para este estudio, sera eliminada. 
-        <a href="elimino.php?id_est=<?php echo $id_estudio; ?>">Eliminar estudio</a>
+        <a onclick="return confirmar();" href="elimino.php?id_est=<?php echo $id_estudio; ?>">Eliminar estudio</a>
         Si existen mas estudios para este paciente, el paciente NO sera eliminado completamente del sistema</p>
         <br>
         <p>Si elimina el paciente con cedula <font style="color: red;"><?php echo $cedula; ?></font>, toda la informacion <br>
         de este paciente sera eliminada.
-        <a href="elimino.php?id_pac=<?php echo $cedula; ?>">Eliminar paciente</a>
+        <a onclick="return confirmar();" href="elimino.php?id_pac=<?php echo $cedula; ?>">Eliminar paciente</a>
        El paciente sera eliminado en forma completa del sistema </p>
         <br>
-        <p>Si presiona <font style="color: red;">Eliminar formulario</font>, los datos correspondientes a ese formulario, correspondiente a ese boton, seran eliminados</p>
-         <?php
+        <p>Si presiona <font style="color: red;">Eliminar formulario</font>, los datos correspondientes a ese formulario, para este paciente, seran eliminados</p>
+        <br>
+            <?php
+            if(isset($_GET['mensage'])){
+                echo '<p>'.$_GET['mensage'].'</p>';
+            }
                  $attr=new atributo();
                  $formula=new formulario();
                  $id_fop=$formula->traerId("paciente");
@@ -80,7 +93,7 @@ Session::init();
  
                          
                      }else{
-                     echo '<td><a href="elimino.php?form='.$value->getNombre().'">'
+                     echo '<td><a onclick="return confirmar();" href="elimino.php?form='.$value->getNombre().'">'
                              . '<button class="btn btn-primary btn-lg btn-block" >Eliminar '.strtoupper($value->getNombre()).'</button></a></td>';        
  }
              }

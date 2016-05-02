@@ -44,7 +44,14 @@ require_once ('./clases/datosPrecargados.php');
       $attr1=new atributo();
         if (is_null($cedula)){
      ?>   
-                    <input type="submit" value="<<Ingresar nuevo paciente>>" class="form-control btn btn-primary" onClick="window.location='muestroVersiones.php?nombre=paciente'">
+       <div class="form-group">  
+                              <label  class="col-sm-8 control-label"></label>
+                                 <div class="col-lg-10">
+                       <input type="submit" value="<<Ingresar nuevo paciente>>" class="btn btn-primary" onClick="window.location='llenarFormularios.php?nombre=paciente'">              
+                                 </div>
+                          </div>
+      
+                    
                     
                     <h3><font style="color: #000;">Proyecto Final Estudios Medicos</h3>
                     <legend>Pacientes en Sistema</legend></font>
@@ -112,7 +119,7 @@ require_once ('./clases/datosPrecargados.php');
  
  ///////////////////////////////////////////////////////////////////////////////////                
  
-         echo '<input type="submit" value="<<Crear un NUEVO ESTUDIO para este paciente Cedula: '.$id_paciente.'>>" class="form-control btn btn-primary" onClick=window.location="crearestudio.php?idpaciente='.$id_paciente.'">';  
+         echo '<input type="submit" value="<<Crear un NUEVO ESTUDIO para este paciente Cedula: '.$id_paciente.'>>" class="btn btn-primary" onClick=window.location="crearestudio.php?idpaciente='.$id_paciente.'">';  
             
        } ?>
         <div id="respuestauser"></div>

@@ -518,11 +518,13 @@ function eliminar(){
         $idf=$estudio->traerIdFormEcho($nomb);
         if($estudio->eliminarFormulario($nomb)){ 
             eliminarFormulario($idf);
-            $mensage="El formulario se elimino con exito";   
+            $mensage="El formulario se elimino con exito"; 
+          
         }else{
           $mensage="Ocurrio un error al intentar eliminar el formulario, verifique";  
         }
-    }else if($_GET['id_est']){
+        
+        }else if($_GET['id_est']){
         $id_estudio=$_GET['id_est'];
         if($estudio->eliminarEstudio($id_estudio)){
             if($can>1){ 

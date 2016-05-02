@@ -53,7 +53,7 @@ function eliminarFormulario($idf){
          unlink($archivos_carpeta);
             }
         }
-    }exit();
+    }
  
 }
 }

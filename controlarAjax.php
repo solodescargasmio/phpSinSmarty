@@ -30,10 +30,10 @@ $form=$formula->traerFormularioId();
         $form=$formula->traerFormularioId();
        
         $resultado=$attr->traerAtributosForm($form->getId_form());
-        foreach ($resultado as $value) {      
-      echo '<div class="form-group" id="'.$value->getNombre().'">';
+        foreach ($resultado as $value) { 
+       echo '<div class="form-group" id="'.$value->getNombre().'" style="border-width: 10px; background:#C8C0C0;">';     
+      //echo '<div class="form-group" id="'.$value->getNombre().'">';
       echo '<label  class="col-sm-8 control-label">'.strtoupper($value->getNombre()).'</label>';
-       echo '<spam"> version('.$form->getVersion().')</spam>';
        echo '<div class="col-lg-10">';
        echo '<input type="text" id="'.$value->getNombre().'" name="'.$value->getNombre().'" value="'.$value->getTipo().'" readonly=>';
         echo'<input type="button" id="'.$value->getNombre().'" value="-" style="color: red;" name="eliminar" ident="'.$value->getNombre().'" onclick="eliminarElementoDom()"></div></div>';
@@ -91,7 +91,7 @@ $form=$formula->traerFormularioId();
          echo '</tr>'; 
          echo '</table>';             
                  if($cedu!=null){}else{
-         echo '<input type="submit" value="<<Trabajar con este paciente (Estudio Nº '.$ca.')>>" class="form-control btn btn-primary" onClick=window.location="ingresar.php?idpaciente='.$id_paciente.'&num='.$ca.'">';   
+         echo '<input type="submit" value="<<Trabajar con este paciente (Estudio Nº '.$ca.')>>" class="btn btn-primary" onClick=window.location="ingresar.php?idpaciente='.$id_paciente.'&num='.$ca.'">';   
               echo '<br><br>';    }
            
                  
@@ -132,12 +132,12 @@ $form=$formula->traerFormularioId();
          echo '</tr>'; 
          echo '</table>';             
                  if($cedu!=null){}else{
-         echo '<input type="submit" value="<<Trabajar con este paciente (Estudio Nº '.$num.')>>" class="form-control btn btn-primary" onClick=window.location="ingresar.php?idpaciente='.$id_paciente.'&num='.$num.'">';   
+         echo '<input type="submit" value="<<Trabajar con este paciente (Estudio Nº '.$num.')>>" class="btn btn-primary" onClick=window.location="ingresar.php?idpaciente='.$id_paciente.'&num='.$num.'">';   
          echo '<br><br>';   }
                } 
  ///////////////////////////////////////////////////////////////////////////////////                
             } //fin if else ca>1
-            echo '<input type="submit" value="<<Crear un NUEVO ESTUDIO para este paciente Cedula: '.$id_paciente.'>>" class="form-control btn btn-primary" onClick=window.location="crearestudio.php?idpaciente='.$id_paciente.'">'; 
+            echo '<input type="submit" value="<<Crear un NUEVO ESTUDIO para este paciente Cedula: '.$id_paciente.'>>" class="btn btn-primary" onClick=window.location="crearestudio.php?idpaciente='.$id_paciente.'">'; 
               
                  }else
             if($_POST['idtraers']){
@@ -179,7 +179,7 @@ $form=$formula->traerFormularioId();
  
  ///////////////////////////////////////////////////////////////////////////////////                
  
-         echo '<input type="submit" value="<<Crear un NUEVO ESTUDIO para este paciente Cedula: '.$id_paciente.'>>" class="form-control btn btn-primary" onClick=window.location="crearestudio.php?idpaciente='.$id_paciente.'">';  
+         echo '<input type="submit" value="<<Crear un NUEVO ESTUDIO para este paciente Cedula: '.$id_paciente.'>>" class="btn btn-primary" onClick=window.location="crearestudio.php?idpaciente='.$id_paciente.'">';  
                  }else
             if($_POST['admin']){
                 $id_paciente=$_POST['admin'];

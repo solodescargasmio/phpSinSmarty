@@ -118,6 +118,18 @@ class formulario {
 } mysqli_close($conexion);
         return $form;
  }
+
+  public function traerFormularioMayor() {
+      $nombre= trim($this->getNombre()); 
+      $dato=0;
+     $conexion=conectar::realizarConexion();
+      $resultado=$conexion->query('SELECT * FROM form WHERE nombre="'.$nombre.'" AND id_form=(SELECT MAX(id_form) FROM form WHERE nombre="'.$nombre.'")');   
+      while ($fila=$resultado->fetch_object()) {
+         $dato=$fila->id_form;            
+} mysqli_close($conexion);
+        return $dato;
+ }
+ 
  public function traerId($nombre){
   $conexion=  conectar::realizarConexion();
          $resultado=$conexion->query("SELECT id_form FROM form WHERE nombre='".$nombre."' AND fecha_crea =(SELECT MAX(fecha_crea) FROM form WHERE nombre='".$nombre."')");       

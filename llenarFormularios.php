@@ -113,6 +113,20 @@
     
     
     });
+    
+      function vacio(e){
+       ok=true;
+       patron =/\w/;
+       k=e.which;
+       if (k==8 || k==0) return true;
+       n = String.fromCharCode(k);
+return patron.test(n);
+ /*if((k < 97 || k > 122) && (k < 65 || k > 90) && (k !== 16||k !== 8||k !== 242)){
+       alert("No agrege espacios en blanco ni caracteres raros \n si quiere escribir varias palabras unalas con guión bajo '_'");
+ok=false; 
+        }
+return ok;*/
+    }
 
     function fecha_es(){
        var fechaActual = new Date();
@@ -205,8 +219,14 @@ require_once ('./multimedia/guardarMultimedia.php');
       $atr=new atributo();
         $tabla=new tabla();
         $form=new formulario();
-      $nombre=trim($_GET['nombre']);
-      $idf=trim($_GET['id_form']);
+      $nombre=trim($_GET['nombre']); 
+      $form->setNombre($nombre);
+      if(isset($_GET['id_form'])){
+          $idf=$_GET['id_form'];
+      }
+      else{
+      $idf=$form->traerFormularioMayor();}
+      $cant=$form->traerCantidad();
 $ok=true;     
 // aca controlo las dependencias:///////////////////
       $depen=new dependencia();
@@ -246,7 +266,15 @@ $ok=true;
         }
            //
         }
-      
+      if($cant>1){?>
+          
+          <div class="form-group">  
+                              <label  class="col-sm-8 control-label"></label>
+                                 <div class="col-lg-10">
+                                     <input type="submit" value="<<Versiones de <?php echo strtoupper($nombre); ?>>>" class="btn btn-primary" onClick="window.location='control.php?nombre=<?php echo $nombre; ?>'">              
+                                 </div>
+                          </div>
+  <?php  }
         
      if((is_null($cedula)) &&  (strcmp($nombre,"paciente")!=0)){ ?>
    <h4>
@@ -257,7 +285,6 @@ $ok=true;
     </div>
  <?php }
  else if(!$ok){
-
      ?><br><br>
         <font style="color: red;font-weight: bold;"><?php echo $mensage; ?></font> 
         <br><br>   <div class="col-lg-offset-2 col-lg-10">
@@ -310,15 +337,15 @@ $ok=true;
                      <?php }
          }else if(strcmp($atributo->getTipo(),"int")==0){
              if((strcmp($atributo->getNombre(),"id_paciente")==0)&&(strcmp($nombre,"paciente")!=0)){ ?>
-        <input type="number" class="form-control" value="<?php echo $cedula;?>" name="<?php echo $atributo->getNombre();?>" id="<?php echo $atributo->getNombre();?>" readonly="">         
+        <input type="number" onkeypress="return vacio(event);" class="form-control" min="1" value="<?php echo $cedula;?>" name="<?php echo $atributo->getNombre();?>" id="<?php echo $atributo->getNombre();?>" readonly="">         
            <?php  }else
                if($atributo->getObligatorio()==1){ ?>
-        <input type="number" class="form-control" name="<?php echo $atributo->getNombre();?>" id="<?php echo $atributo->getNombre();?>" required="">                  
+        <input type="number" onkeypress="return vacio(event);" class="form-control" min="1" name="<?php echo $atributo->getNombre();?>" id="<?php echo $atributo->getNombre();?>" required="">                  
                    <?php } else if(($atributo->getObligatorio()!=0)&&(strcmp($atributo->getNombre(),"id_paciente")!=0)&&(strcmp($nombre,"paciente")!=0)){ ?>
-         <input type="number" class="form-control" name="<?php echo $atributo->getNombre();?>" id="<?php echo $atributo->getNombre();?>">               
+        <input type="number" onkeypress="return vacio(event);" class="form-control" min="1" name="<?php echo $atributo->getNombre();?>" id="<?php echo $atributo->getNombre();?>">               
                    <?php }
                      else { ?>
-         <input type="number" class="form-control" name="<?php echo $atributo->getNombre();?>" id="<?php echo $atributo->getNombre();?>">               
+         <input type="number" onkeypress="return vacio(event);" class="form-control" min="1" name="<?php echo $atributo->getNombre();?>" id="<?php echo $atributo->getNombre();?>">               
      <?php }
         
                    

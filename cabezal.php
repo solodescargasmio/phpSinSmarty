@@ -125,9 +125,11 @@ overflow: auto;
      if(!isset($nick)){
     ?>
       <a tabindex="-1" class="navbar-brand" href="manual.php">Manual del sitio</a>
+       <a tabindex="-1" class="navbar-brand" href="cerrarSesion.php">Ingreso</a> 
      <?php }; ?>
-       
-        <a tabindex="-1" class="navbar-brand" href="cerrarSesion.php">Ingreso</a>       
+       <a tabindex="-1" class="navbar-brand" href="#"></a> 
+       <a tabindex="-1" class="navbar-brand" href="#"></a> 
+             
         <?php
      if(isset($nick)){ ?>
         <a tabindex="-1" class="navbar-brand" href="principal.php">Pagina Principal</a> 
@@ -184,12 +186,7 @@ overflow: auto;
               foreach ($resultado as $key => $value) {
                   $dat=$value->traerCantidad(); ?>
       <li class="dropdown">
-               <?php if($dat>1){
-                   ?>   
-     <a tabindex="-1" href="control.php?nombre=<?php echo $value->getNombre();?>"> <font style="font-weight: bold;"><?php echo strtoupper($value->getNombre());?></font></a>
- <?php  }else{ ?> 
-   <a tabindex="-1" href="llenarFormularios.php?nombre=<?php echo $value->getNombre();?>&id_form=<?php echo $value->getId_form();?>"> <font style="font-weight: bold;"><?php echo strtoupper($value->getNombre());?></font></a>              
-                       <?php } ?>    
+   <a tabindex="-1" href="llenarFormularios.php?nombre=<?php echo $value->getNombre();?>"> <font style="font-weight: bold;"><?php echo strtoupper($value->getNombre());?></font></a>              
                <!--  <a tabindex="-1" href="llenarFormularios.php?nombre=<?php echo $value->getNombre();?>"> <font style="font-weight: bold;"><?php echo strtoupper($value->getNombre());?></font></a>-->
          </li>       
          <?php      }   

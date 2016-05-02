@@ -48,7 +48,7 @@ $(document).ready(function(){
           $(function() {
             var $fieldset = $('<fieldset>');    
     var $form = $("#my-dynamic-form");
-    $(' <div class="form-group">'+
+    $('<div class="form-group" style="border-width: 10px; background:#C8C0C0;">'+
                  '<label  class="col-sm-8 control-label">Nombre Formulario(*)</label>'+
     '<div class="col-lg-10">').appendTo($fieldset);
     $('<input type="text" name="nom_formulario" id="nom_formulario" onblur="control();" required="" readonly>').appendTo($fieldset);
@@ -67,7 +67,7 @@ $(document).ready(function(){
        if(da==0){ //si son distintos lo agrego
            gu="guardo";
            $("#my-dynamic-form input").remove("#"+gu+""); 
-        $(' <div class="form-group" id="'+ $dato +'">'+
+        $(' <div class="form-group" id="'+ $dato +'" style="border-width: 10px; background:#C8C0C0;">'+
                  '<label  class="col-sm-8 control-label">'+ capitalize($dato) +'</label>'+
     '<div class="col-lg-10">'+
         '<input type="text" id="'+ $dato +'" name="'+ $dato +'" value="'+ $dato1 +'" readonly=>'+

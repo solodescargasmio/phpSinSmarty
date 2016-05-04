@@ -11,11 +11,12 @@
 	define("FTP_PASS", "");//pass: yo no uso
         
         
- //correo para el olvido de contraseña
+ //correo para el olvido de contraseña (correo que se usa para enviar, debe ser gmail)
         define("Email",'Aca su gmail');
         define("Epass", 'Aca la pass de su gmail');
         
-//rutas para las carpetas        
-define("Ruta",dirname(__FILE__));      
+//rutas para las carpetas (Aca se generan las carpetas que guardan los videos, imagenes, ect.)       
+define("Ruta","./multimedia");      
+
 
 ?>

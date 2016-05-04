@@ -528,10 +528,10 @@ function eliminar(){
         $id_estudio=$_GET['id_est'];
         if($estudio->eliminarEstudio($id_estudio)){
             if($can>1){ 
-                 $carpeta="./multimedia/".$id_user."/".$id_estudio;
+                 $carpeta=Ruta."/".$id_user."/".$id_estudio;
         eliminarDirectorio($carpeta);
            }else{
-                $carpeta="./multimedia/".$id_user."/"; 
+                $carpeta=Ruta."/".$id_user."/"; 
         eliminarDirectorio($carpeta);
            }
            
@@ -543,8 +543,9 @@ function eliminar(){
     }else if($_GET['id_pac']){  
         $id_paciente=$_GET['id_pac']; 
           if($estudio->eliminarPaciente($id_paciente)){
-           $carpeta="./multimedia/".$id_user."/"; 
+           $carpeta=Ruta."/".$id_user."/"; 
         eliminarDirectorio($carpeta);
+        cerrar();
             $mensage="El paciente se elimino con exito"; 
         }else{
           $mensage="Ocurrio un error al intentar eliminar el paciente, verifique";  

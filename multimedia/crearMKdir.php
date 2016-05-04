@@ -5,8 +5,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+require_once ('./conexion/configuracion.php');
 function crearDir($id) {
-   $ruta=dirname(__FILE__).'/'.$id;
+   $ruta=Ruta.'/'.$id;
    //var_dump($ruta);exit();
             if (!file_exists($ruta)) {  
     mkdir($ruta, 0777,true)or die('Fallo al crear el directorio'); 

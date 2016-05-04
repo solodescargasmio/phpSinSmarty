@@ -1,0 +1,30 @@
+Primero debes copiar toda la carpeta Documents and Settings a la partición donde quieras tenerla, 
+pero para que quede bien copiada debes hacerlo desde una consola (Inicio -> Ejecutar -> Cmd) y pon el siguiente comando:
+
+    XCOPY “C:\Documents and Settings\*.*” “D:\Documents and Settings” /E/C/H/K/X
+
+
+%SystemDrive%
+
+
+Suponiendo que D: es la nueva partición donde van a estar los perfiles.
+
+-Ahora tenemos que editar el registro, para eso iniciamos el Editor del Registro (Inicio -> Ejecutar -> Regedit.exe) y buscamos lo siguiente:
+
+    HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsNT\CurrentVersion\ProfileList
+
+Y cambiamos ahí mismo cualquier referencia a C:\Documents and Settings a D:\Documents and Settings (en algunos Windows suele decir: %SystemDrive%\Documents and Settings, asi que cambiar %SystemDrive% por D:).
+
+mover archivo de programas :
+
+Para Windows Vista, comienza por habilitar el comando "Ejecutar" en el menú Inicio.
+
+    Haz clic en el Menú Inicio > Ejecutar (o presiona las teclas Windows + R)
+    Escribe "regedit" y presiona Enter.
+    Abre la clave: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion
+    Haz un doble clic en el campo "ProgramFilesDir" y modifica los datos de este campo para la nueva ruta de la carpeta de instalación.
+        Por ejemplo, ingresa la ruta D:\Program Files, para cambiar la partición en la cual las instalaciones de programas se harán.
+
+Instalar node js desde comando
+
+C:\>msiexec/a "E:\Escritorio\node-v0.12.7-x86.msi"/qb TARGETDIR="D:\Archivos de programa\nodejs"

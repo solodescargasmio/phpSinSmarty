@@ -20,6 +20,7 @@ class conectar {
         $db=DB_DB;
           $conexion =mysqli_connect($localhost,$root,$pass,$db)or die("Error al conectar");
           mysqli_set_charset($conexion,"utf8");
+          
            return $conexion;
       }
      

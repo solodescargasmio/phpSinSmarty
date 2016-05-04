@@ -75,7 +75,7 @@ function olvidoPass(){//120704admin
                     $usr->setPass(sha1($pass));
                     if($usr->modificarPass()){
                     $cuerpo="Su nueva password es : ".$pass."<br>Ingrese "
-                            . "<a href='http://localhost/phpDinamico/index.php'>aquí</a> con su usuario y la nueva password y luego modifique su password por una mas segura,"
+                            . "<a href='http://localhost/sinSmarty/index.php'>aquí</a> con su usuario y la nueva password y luego modifique su password por una mas segura,"
                             . "<br>Gracias";
                     require_once ('./clases/enviarPHPmailer.php');
                     $envio=new enviarPHPmailer();

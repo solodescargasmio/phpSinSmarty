@@ -32,7 +32,7 @@ function eliminarFormulario($idf){
              Session::init();
     $id_user=Session::get('cedula');
     $id_estudio= Session::get("estudio");
-    $carpeta="./multimedia/".$id_user."/".$id_estudio;
+    $carpeta=Ruta."/".$id_user."/".$id_estudio;
   $attr=new atributo();
     $attribu=$attr->traerAtributosFormFile($idf);
          foreach ($attribu as $key => $value) {
@@ -65,7 +65,7 @@ function eliminarArchivo($idf){
              Session::init();
     $id_user=Session::get('cedula');
     $id_estudio= Session::get("estudio");
-    $carpeta="./multimedia/".$id_user."/".$id_estudio;
+    $carpeta=Ruta."/".$id_user."/".$id_estudio;
   $attr=new atributo();
     $attribu=$attr->traerAtributosFormFile($idf);
   
@@ -92,9 +92,9 @@ function eliminarArchivo($idf){
  
 }}
  
-    $directorio = dirname(__FILE__).'/'.$id_user.'/'.$id_estudio;
+    $directorio = Ruta.'/'.$id_user.'/'.$id_estudio;
 
-$serv =dirname(__FILE__).'/'.$id_user.'/'.$id_estudio.'/';
+$serv =Ruta.'/'.$id_user.'/'.$id_estudio.'/';
 
   $exten=explode(".",$_FILES[$nombre]['name']);
         $ex=end($exten);
@@ -163,7 +163,7 @@ $serv =dirname(__FILE__).'/'.$id_user.'/'.$id_estudio.'/';
  $newpng=$value->getNombre().".".$ex;
  
                                 copy($remoto, $ruta);  
-         $video=exec("ffmpeg -i ".$remoto." -ss 00:00:00 -t 00:01:00 -async 1 ./multimedia/$id_user/$id_estudio/".$value->getNombre().".webm");
+         $video=exec("ffmpeg -i ".$remoto." -ss 00:00:00 -t 00:01:00 -async 1 ".Ruta."/$id_user/$id_estudio/".$value->getNombre().".webm");
                 
  //  exec("ffmpeg -i ".$remoto." -vcodec copy -ss 1 -t 120 -acodec ".$varia.".webm 2>&1"); 
           $ruta = $serv.$video; 

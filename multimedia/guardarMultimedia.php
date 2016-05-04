@@ -37,13 +37,13 @@ function subirDatos($id){
                 if($i==$conta){
                      if(strcmp($_FILES["archivo"]["name"][$i],"")!=0){
  
-    $directorio = dirname(__FILE__).'/'.$id_user.'/'.$id_estudio;
+    $directorio = Ruta.'/'.$id_user.'/'.$id_estudio;
    
 if (!file_exists($directorio)) {
     crearDir($id_user.'/'.$id_estudio);
 }
 
-$serv =dirname(__FILE__).'/'.$id_user.'/'.$id_estudio.'/';
+$serv =Ruta.'/'.$id_user.'/'.$id_estudio.'/';
 
   $exten=explode(".",$_FILES['archivo']['name'][$i]);
         $ex=end($exten);
@@ -112,7 +112,7 @@ $serv =dirname(__FILE__).'/'.$id_user.'/'.$id_estudio.'/';
  $newpng=$value->getNombre().".".$ex;
  
                                 copy($remoto, $ruta);  
-         $video=exec("ffmpeg -i ".$remoto." -ss 00:00:00 -t 00:01:00 -async 1 ./multimedia/$id_user/$id_estudio/".$value->getNombre().".webm");
+         $video=exec("ffmpeg -i ".$remoto." -ss 00:00:00 -t 00:01:00 -async 1 ".Ruta."/$id_user/$id_estudio/".$value->getNombre().".webm");
                 
  //  exec("ffmpeg -i ".$remoto." -vcodec copy -ss 1 -t 120 -acodec ".$varia.".webm 2>&1"); 
           $ruta = $serv.$video; 

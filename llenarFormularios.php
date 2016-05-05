@@ -87,7 +87,7 @@
         }
            
             if($('input[name=altura]').length > 0){  //compruebo que el elemento existe       
-   $('input[name=altura]').attr('placeholder','Con punto(.) EJ: 1.60, NO introdusca comas(,) ');
+   $('input[name=altura]').attr('placeholder','en centimetros  EJ: 162, NO introdusca punto(.) o comas(,) ');
      }
       
         
@@ -153,7 +153,8 @@ var yyyyActual = fechaActual.getFullYear();
     }
     
     function calcular_imc(peso,altura){
-        var $indice=peso/(altura*altura);
+        var altu=altura/100;
+        var $indice=peso/(altu*altu);
         return $indice;
     }
     
@@ -185,6 +186,18 @@ edad--;
 }
 return edad;
 };
+
+
+
+  function validarCampos(e){
+  // Recorremos los inputs del formulario (uno a uno)
+       patron =/\w/;
+       k=e.which;
+       if (k==8 || k==0) return true;
+       n = String.fromCharCode(k);
+return patron.test(n);
+ 
+}
 
 </script> 
 </head>
@@ -308,9 +321,9 @@ $ok=true;
         <?php
          if((strcmp($atributo->getTipo(),"double")==0)||(strcmp($atributo->getTipo(),"float")==0)){
              if($atributo->getObligatorio()==1){?>
-             <input type="text" class="form-control" name="<?php echo $atributo->getNombre();?>" id="<?php echo $atributo->getNombre();?>" required="">      
+        <input type="text" onkeypress="return validarCampos(event);" class="form-control" name="<?php echo $atributo->getNombre();?>" id="<?php echo $atributo->getNombre();?>" required="">      
              <?php }else{?>
-              <input type="text" class="form-control" name="<?php echo $atributo->getNombre();?>" id="<?php echo $atributo->getNombre();?>">    
+        <input type="text" onkeypress="return validarCampos(event);" class="form-control" name="<?php echo $atributo->getNombre();?>" id="<?php echo $atributo->getNombre();?>">    
             <?php }
              }//fin (strcmp(atributo->getTipo(),"double")==0)||(strcmp(atributo->getTipo(),"float")==0
          else if(strcmp($atributo->getTipo(),"text")==0){

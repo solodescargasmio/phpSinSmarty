@@ -8,7 +8,7 @@
 require_once ('./conexion/configuracion.php');
 function crearBaseDeDatos(){
      try {
-   $pdo1=new PDO('mysql:host=localhost;dbname=phpfinal', DB_USR, DB_PASS)or die("Error al conectar"); 
+   $pdo1=new PDO('mysql:host=localhost;dbname='.DB_DB, DB_USR, DB_PASS)or die("Error al conectar"); 
 } catch (PDOException $e) {
     cargarTablas();
 }
@@ -17,7 +17,7 @@ function crearBaseDeDatos(){
 
 function cargarTablas(){
  $pdo = new PDO('mysql:host=localhost', DB_USR, DB_PASS);
-$sql="CREATE DATABASE IF NOT EXISTS `phpfinal` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+$sql="CREATE DATABASE IF NOT EXISTS ".DB_DB." DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `phpfinal`;";
 $pdo->exec($sql);
 $sql="CREATE TABLE IF NOT EXISTS `administrador` (
@@ -30,7 +30,7 @@ $sql="CREATE TABLE IF NOT EXISTS `administrador` (
   `tipo` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `nick` (`nick`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;";
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;";
 $pdo->exec($sql);
 $sql="INSERT INTO `administrador` (`id`, `nick`, `nombre`, `apellido`, `email`, `pass`, `tipo`) VALUES
 (1, 'admin', 'Ad', 'Min', 'micorreo@outlook.com', 'd033e22ae348aeb5660fc2140aec35850c4da997', 0);";
@@ -42,7 +42,7 @@ $sql="CREATE TABLE IF NOT EXISTS `atributo` (
   `calculado` tinyint(1) NOT NULL,
   `tabla` tinyint(4) NOT NULL,
   PRIMARY KEY (`id_attributo`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=36 ;";
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;";
 $pdo->exec($sql);
 $sql="INSERT INTO `atributo` (`id_attributo`, `nombre`, `tipo`, `calculado`, `tabla`) VALUES
 (1, 'id_paciente', 'int', 0, 0),
@@ -97,7 +97,7 @@ $sql="CREATE TABLE IF NOT EXISTS `estudio_atributo` (
   `valor` text NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_estudio` (`id_estudio`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=41 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 ";
 $pdo->exec($sql);
 $sql="CREATE TABLE IF NOT EXISTS `estudio_paciente` (
@@ -106,7 +106,7 @@ $sql="CREATE TABLE IF NOT EXISTS `estudio_paciente` (
   `fecha_estudio` date NOT NULL,
   `numero` int(11) NOT NULL,
   PRIMARY KEY (`id_estudio`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;";
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;";
 $pdo->exec($sql);
 $sql="CREATE TABLE IF NOT EXISTS `form` (
   `id_form` int(11) NOT NULL AUTO_INCREMENT,
@@ -114,7 +114,7 @@ $sql="CREATE TABLE IF NOT EXISTS `form` (
   `version` int(11) NOT NULL,
   `fecha_crea` date NOT NULL,
   PRIMARY KEY (`id_form`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;";
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;";
 $pdo->exec($sql);
 $sql="INSERT INTO `form` (`id_form`, `nombre`, `version`, `fecha_crea`) VALUES
 (1, 'paciente', 1, '2016-04-07'),
@@ -146,6 +146,7 @@ $sql="INSERT INTO `form_attr` (`id_form`, `id_attributo`, `obligatorio`) VALUES
 (2, 7, 1),
 (2, 8, 1),
 (2, 9, 1),
+(2, 10, 1),
 (3, 1, 1),
 (3, 11, 1),
 (3, 12, 1),
@@ -198,7 +199,7 @@ $sql="CREATE TABLE IF NOT EXISTS `tabla` (
   `opcion` varchar(50) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_attributo` (`id_attributo`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;";
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
 $pdo->exec($sql);
 $sql="INSERT INTO `tabla` (`id`, `id_attributo`, `opcion`) VALUES
 (1, 6, 'femenino'),

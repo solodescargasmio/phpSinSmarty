@@ -18,7 +18,7 @@ function crearBaseDeDatos(){
 function cargarTablas(){
  $pdo = new PDO('mysql:host=localhost', DB_USR, DB_PASS);
 $sql="CREATE DATABASE IF NOT EXISTS ".DB_DB." DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `phpfinal`;";
+USE ".DB_DB.";";
 $pdo->exec($sql);
 $sql="CREATE TABLE IF NOT EXISTS `administrador` (
   `id` int(11) NOT NULL AUTO_INCREMENT,

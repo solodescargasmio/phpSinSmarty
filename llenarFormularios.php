@@ -87,7 +87,7 @@
         }
            
             if($('input[name=altura]').length > 0){  //compruebo que el elemento existe       
-   $('input[name=altura]').attr('placeholder','en centimetros  EJ: 162, NO introdusca punto(.) o comas(,) ');
+   $('input[name=altura]').attr('placeholder','Con punto(.) EJ: 1.60, NO introdusca comas(,) ');
      }
       
         
@@ -153,8 +153,7 @@ var yyyyActual = fechaActual.getFullYear();
     }
     
     function calcular_imc(peso,altura){
-        var altu=altura/100;
-        var $indice=peso/(altu*altu);
+        var $indice=peso/(altura*altura);
         return $indice;
     }
     
@@ -191,7 +190,7 @@ return edad;
 
   function validarCampos(e){
   // Recorremos los inputs del formulario (uno a uno)
-       patron =/\w/;
+       patron =/[^A-Za-z,]/;
        k=e.which;
        if (k==8 || k==0) return true;
        n = String.fromCharCode(k);

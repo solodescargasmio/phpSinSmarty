@@ -18,8 +18,19 @@
     <script src="./js/bootstrap.min.js"></script>
     <script src="./js/jquery.min.js"></script>
     <script src="./js/dateFechamio.js"></script>
+    <script src="./js/jquery.js"></script>
     <script>
-        
+      function confirmar(){
+           var ok=false;
+            var pass=document.getElementById("passw").value;
+          var dato=document.getElementById("passw1").value;
+if(dato!='' && dato==pass){
+    ok=true;
+}else if(dato==''){
+    alert('Las contraseñas no coinciden o un campo está vacio');
+}
+          return ok;
+      }  
     </script> 
 </head>
 
@@ -74,12 +85,18 @@ require_once ('./clases/session.php');
                <div class="form-group">
           <label  class="col-sm-4 control-label">Contraseña</label>
     <div class="col-lg-offset-2 col-lg-10">
-        <input type="password" name="passw"></div>
+        <input type="password" name="passw" id="passw"></div>
   </div>
+          
+            <div class="form-group">
+          <label  class="col-sm-4 control-label">Confirmar Contraseña</label>
+    <div class="col-lg-offset-2 col-lg-10">
+        <input type="password" name="passw1" id="passw1"></div><div id="respuesta"></div>
+  </div>   
             
   <div class="form-group">
     <div class="col-lg-offset-2 col-lg-10">
-      <button type="submit" class="btn btn-primary btn-lg btn-block">Modificar Datos</button>
+        <button type="submit" class="btn btn-primary btn-lg btn-block" onclick="return confirmar();">Modificar Datos</button>
     </div>
   </div>
             

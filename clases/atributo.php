@@ -197,4 +197,18 @@ public function ingresarAtributo(){
         return $dato;
  }
  
+ public function modificarAtributo(){
+        $conexion=conectar::realizarConexion();
+        $nombre=$this->getNombre();
+        $id_att=  $this->getId_attributo();
+      $conexion=conectar::realizarConexion();
+      $smtp=$conexion->prepare("UPDATE atributo SET nombre = ? WHERE id_attributo=?" );
+       $smtp->bind_param("si",$nombre,$id_att);
+       $smtp->execute();
+       $res=false;
+      if($conexion->affected_rows>0){
+       $res=true;
+       }
+       return $res;
+ }
 }

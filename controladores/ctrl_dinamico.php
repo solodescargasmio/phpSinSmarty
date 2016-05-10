@@ -19,6 +19,7 @@ require_once ('./clases/dependencia.php');
 require_once ('./clases/datosPrecargados.php');
 require_once ('./multimedia/crearMKdir.php');
 require_once ('./multimedia/guardarMultimedia.php');
+require_once ('./dump_db.php');
 function principal(){ 
  error_reporting(0);
     Session::init();
@@ -554,4 +555,23 @@ function eliminar(){
         $mensage="La pagina no está disponible"; 
     }
    header('Location: principal.php?mensage='.$mensage); 
+}
+
+function modAtributo(){
+    $nomb=$_POST['atributo'];
+    $id_att=$_POST['id_attr'];
+     $attr=new atributo();
+     $attr->setNombre($nomb);
+     $attr->setId_attributo($id_att);
+     $mensage="";
+     if($attr->modificarAtributo()){
+         $mensage="El atributo se modifico de forma correcta.";
+     }else{
+         $mensage="Error al modificar atributo. Verifique";
+     }
+     header("Location: modAtributo.php?mensage=".$mensage);
+}
+
+function respaldarBD(){
+    header("Location: dump_db.php");
 }

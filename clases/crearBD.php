@@ -201,10 +201,6 @@ $sql="CREATE TABLE IF NOT EXISTS `tabla` (
   KEY `id_attributo` (`id_attributo`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
 $pdo->exec($sql);
-$sql="INSERT INTO `tabla` (`id`, `id_attributo`, `opcion`) VALUES
-(1, 6, 'femenino'),
-(2, 6, 'masculino');";
-$pdo->exec($sql);
 $sql="ALTER TABLE `estudio_atributo`
   ADD CONSTRAINT `estudio_atributo_ibfk_1` FOREIGN KEY (`id_estudio`) REFERENCES `estudio_paciente` (`id_estudio`) ON DELETE CASCADE ON UPDATE CASCADE;
 ";

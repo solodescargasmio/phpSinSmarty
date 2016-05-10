@@ -18,5 +18,8 @@
 //rutas para las carpetas (Aca se generan las carpetas que guardan los videos, imagenes, ect.)       
 define("Ruta","./multimedia");      
 
+//rutas para el respaldo de la Base de Datos      
+define("R_BD","");//donde esta la base de datos 
+define("R_RESPALDO","E:\Escritorio");//donde respaldamos la BD
 
 ?>

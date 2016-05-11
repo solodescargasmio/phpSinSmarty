@@ -24,12 +24,15 @@
            var ok=false;
             var pass=document.getElementById("passw").value;
           var dato=document.getElementById("passw1").value;
+          if(pass!=''){
 if(dato!='' && dato==pass){
     ok=true;
 }else if(dato==''){
-    alert('Las contraseñas no coinciden o un campo está vacio');
+    alert('El campo Confirmar Contraseña está vacio');
+}else if(dato!=pass){
+  alert('Las contraseñas no coinciden');  
 }
-          return ok;
+          return ok;}
       }  
     </script> 
 </head>

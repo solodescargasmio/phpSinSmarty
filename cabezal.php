@@ -227,9 +227,7 @@ overflow: auto;
               </font>
             </ul> 
         </li>
-    
-       <li class="dropdown">    
-          <a tabindex="-1" href="estadisticas.php">Estadisticas</a></li> 
+   
          <?php }
         if(isset($cedula)){
          ?> 

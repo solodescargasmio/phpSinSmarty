@@ -15,7 +15,8 @@
  require_once ('admin.php');
  require_once ('./conexion/configuracion.php');
 class enviarPHPmailer {
-    public function enviar($email, $nick, $cuerpo,$asunto) {  
+    public function enviar($email, $nick, $cuerpo,$asunto) {
+        $ok=true;
         $usr=new admin();
         $usr->setNick($nick);
         $usr=$usr->traerAdmin();
@@ -36,11 +37,9 @@ $mail->Body= $cuerpo;
 $mail->AltBody =$cuerpo;
 $mail->Port=587;
 if(!$mail->send()) {
-   echo 'El Mensaje no se pudo enviar.';
-   echo 'Mailer Error: ' . $mail->ErrorInfo;
-   exit;
+   $ok=false;
 }
 //var_dump($mail);exit();
-
+return $ok;
     }
 }

@@ -81,9 +81,13 @@ function olvidoPass(){//120704admin
                     $envio=new enviarPHPmailer();
                      $asunto="Cambio de password";
                        //var_dump($asunto);exit();
-                    $envio->enviar($email, $nick, $cuerpo, $asunto);          
+                   if($envio->enviar($email, $nick, $cuerpo, $asunto)){
+                    $mensaje="Un mensaje se envió a su correo, verifíque";   
+                   }else{
+                       $mensage='El Mensaje no se pudo enviar.Verifique';
+                   }         
 		}
-                $mensaje="Un mensaje se envió a su correo, verifíque";
+                //$mensaje="Un mensaje se envió a su correo, verifíque";
                 header("Location: index.php?mensage=".$mensaje);
 
 }

@@ -47,7 +47,9 @@
    <?php include 'cabezal.php'; ?>
     <div class="container-fluid">
         <div class="marco">
-            <h3>Bienvenido a Estudios Medicos (TIPay)</h3>
+            <h3>Sistema de gestión de
+Estudios médicos 
+Heterogéneos (TIPay)</h3>
             <img class="imgprincipal" src="./imagenes/header.jpg" alt="Imagen de la universidad">
        
                <?php

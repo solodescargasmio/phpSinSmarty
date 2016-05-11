@@ -51,6 +51,33 @@ ok=false;
         }
 return ok;*/
     }  
+  function confirmar(){
+           var ok=false;
+            var pass=document.getElementById("nombre").value;
+ 
+      if(pass!=''){
+             ok=true;
+         }else{
+             alert('Ingrese un nombre para el atributo');
+         }
+          return ok;
+      }
+      
+      function confirmarCompuesto(){
+           var ok=false;
+            var pass=document.getElementById("nombrecom").value;
+      if(pass!=''){
+          var tex=document.getElementById("selectortexto").value;
+          if(tex!=''){
+               ok=true;
+          }else{
+             alert('Ingrese opciones para el atributo compuesto');
+         }    
+         }else{
+             alert('Ingrese un nombre para el atributo');
+         }
+          return ok;
+      }
     
     </script>
     </head>
@@ -85,7 +112,7 @@ return ok;*/
         </select>
                    </div> 
                 </div>   
-      <input type="submit" value="Enviar" class="btn btn-primary btn-group-justified">
+      <input type="submit" onclick="return confirmar();" value="Enviar" class="btn btn-primary btn-group-justified">
             </form>
     
    <form style="width: 600px;" id="myform2" method="post" enctype="multipart/form-data" class="form-horizontal" action="atrapar.php">                            
@@ -94,18 +121,18 @@ return ok;*/
       <div class="form-group">     
        <label  class="col-sm-4 control-label">Nombre de la tabla</label>
                     <div class="col-sm-8">
-  <input type="text" onkeypress="return vacio(event);" name="nombre" id="nombre" placeholder="Ej: sexo (Sin espacios o caracteres raros)" class="success" size ="50">
+  <input type="text" onkeypress="return vacio(event);" name="nombre" id="nombrecom" placeholder="Ej: sexo (Sin espacios o caracteres raros)" class="success" size ="50">
                    </div> 
                 </div> 
       
       <div class="form-group">     
        <label  class="col-sm-4 control-label">Agregar opciones de atributo</label>
                     <div class="col-sm-8">
-                        <textarea name="selectortexto" placeholder="ej: masculino,   femenino"></textarea>
+                        <textarea id="selectortexto" name="selectortexto" placeholder="ej: masculino,   femenino"></textarea>
                         <font style="color: red;font-weight: bold;">   Separados por comas (',')</font>
                     </div> 
                 </div>   
-      <input type="submit" value="Enviar" class="btn btn-primary btn-group-justified">
+      <input type="submit" onclick="return confirmarCompuesto();" value="Enviar" class="btn btn-primary btn-group-justified">
             </form>
           <?php 
           error_reporting(0);

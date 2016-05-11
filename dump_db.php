@@ -199,7 +199,7 @@ header('Content-Type: text/html; charset=iso-8859-1');
 <!DOCTYPE html>
 <HTML>
  <HEAD>
-	<title>Respaldo y descargas de la Base de Datos</title>
+	<title>Estudios Medicos||Respaldo</title>
 	<!-- no cache headers -->
 	<meta http-equiv="Pragma" content="no-cache">
 	<meta http-equiv="no-cache">
@@ -227,7 +227,7 @@ header('Content-Type: text/html; charset=iso-8859-1');
 	link="#000020" 
 	vlink="#000020" 
 	alink="#000020">
-<center><h1>Dump y Download la Base de Datos</h1></center>
+<center><h1>Respaldo y descargas de la Base de Datos</h1></center>
 <br>
 <strong>
 <?php

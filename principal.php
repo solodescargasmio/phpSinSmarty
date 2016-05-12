@@ -44,16 +44,11 @@ require_once ('./clases/datosPrecargados.php');
       $attr1=new atributo();
         if (is_null($cedula)){
      ?>   
-       <div class="form-group">  
-                              <label  class="col-sm-8 control-label"></label>
-                                 <div class="col-lg-10">
-                       <input type="submit" value="<<Ingresar nuevo paciente>>" class="btn btn-primary" onClick="window.location='llenarFormularios.php?nombre=paciente'">              
-                                 </div>
-                          </div>
-      
-                    
-                    
+ 
                     <h3><font style="color: #000;">Proyecto Final Estudios Medicos</h3>
+                    <br>    
+                     <input type="submit" value="<<Ingresar nuevo paciente>>" class="btn btn-primary" onClick="window.location='llenarFormularios.php?nombre=paciente'">              
+                     <br><br>     
                     <legend>Pacientes en Sistema</legend></font>
       <div class="form-group">
     <label for="nombre" class="col-lg-2 control-label">Seleccione cedula del paciente con el cual va a trabajar o click en la LUPA arriba a la derecha</label>

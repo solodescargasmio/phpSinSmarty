@@ -19,7 +19,6 @@ require_once ('./clases/dependencia.php');
 require_once ('./clases/datosPrecargados.php');
 require_once ('./multimedia/crearMKdir.php');
 require_once ('./multimedia/guardarMultimedia.php');
-require_once ('./dump_db.php');
 function principal(){ 
  error_reporting(0);
     Session::init();
@@ -570,8 +569,4 @@ function modAtributo(){
          $mensage="Error al modificar atributo. Verifique";
      }
      header("Location: modAtributo.php?mensage=".$mensage);
-}
-
-function respaldarBD(){
-    header("Location: dump_db.php");
 }

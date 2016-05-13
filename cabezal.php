@@ -217,16 +217,7 @@ overflow: auto;
               </font>
             </ul> 
         </li>
-        
-        <li class="dropdown">
-            <a href="#" class="dropdown-toggle js-activated" data-toggle="dropdown">Base de Datos<b class="caret"></b></a>
-           <ul class="dropdown-menu">
-      <font style="font-weight: bold;">
-              <li class="dropdown">    
-          <a tabindex="-1" href="respaldar.php">Respaldar BD</a></li> 
-              </font>
-            </ul> 
-        </li>
+   
    
          <?php }
         if(isset($cedula)){

@@ -11,7 +11,6 @@ require_once ('./clases/admin.php');
 require_once ('./clases/estudio_medico.php');
 require_once ('./clases/dependencia.php');
 require_once ('./clases/session.php');
-require_once ('./clases/crearBD.php');
 error_reporting(0);
 if($_POST['nom_formulario']){
 $nomb=$_POST['nom_formulario'];
@@ -183,9 +182,9 @@ $form=$formula->traerFormularioId();
          echo '<input type="submit" value="<<Crear un NUEVO ESTUDIO para este paciente Cedula: '.$id_paciente.'>>" class="btn btn-primary" onClick=window.location="crearestudio.php?idpaciente='.$id_paciente.'">';  
                  }else
             if($_POST['admin']){
-              require_once ('./clases/crearBD.php');  
+ 
                 $id_paciente=$_POST['admin'];              
-                crearBaseDeDatos();
+               
                 $admin=new admin();
                 $admin->setNick($id_paciente);
                 $admin=$admin->traerAdmin();       

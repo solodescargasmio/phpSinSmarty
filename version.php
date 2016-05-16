@@ -217,7 +217,7 @@ function capitalize(s)//convierte minusculas a Mayusculas
                 </div> 
            
           </div>
-      <h6><font style="color: red;">Para eliminar atributo agregado,<br> doble click sobre el boton |-| al costado de cada atributo</font> </h6>
+      <h6><font style="color: red;font-weight: bold;">Para eliminar atributo agregado,<br> doble click sobre el boton |-| al costado de cada atributo</font> </h6>
       
      <?php
 error_reporting(0);
@@ -225,7 +225,7 @@ error_reporting(0);
    if(isset($mensage)){ ?>
       <font style="color: red;font-weight: bold;"><?php echo $mensage;?></font> 
      <?php } ?>
-      <div style="float: right;"><h6><font style="color: red;">Para agregar atributo,<br> click sobre el nombre del atributo</font> </h6></div>
+      <div style="float: right;"><h6><font style="color: red;font-weight: bold;">Para agregar atributo,<br> click sobre el nombre del atributo</font> </h6></div>
        <div id="avizo"></div>
       
       <h3>Formulario</h3>

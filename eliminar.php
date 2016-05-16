@@ -94,7 +94,7 @@ Session::init();
                          
                      }else{
                      echo '<td><a onclick="return confirmar();" href="elimino.php?form='.$value->getNombre().'">'
-                             . '<button class="btn btn-primary btn-lg btn-block" >Eliminar '.strtoupper($value->getNombre()).'</button></a></td>';        
+                             . '<button class="btn btn-primary" >Eliminar '.strtoupper($value->getNombre()).'</button></a></td>';        
  }
              }
         echo '</tr>';

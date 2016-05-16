@@ -92,6 +92,7 @@
       
         
   $('input[name=edad]').click(function(){
+      
            var value=document.getElementById("datepicker").value;
           var dato=calcular_edad(value);
           document.getElementById("edad").value=dato;
@@ -393,18 +394,34 @@ $ok=true;
         <form style="width: 500px;" role="form" method="POST" enctype="multipart/form-data" action="llenar.php">   
             <fieldset><legend><?php echo strtoupper($nombre); ?></legend></fieldset>
         <?php foreach ($estudios as $keys => $estudio) {
-  ?>
+           $tab=$atr->devolverTabla($estudio->getId_attributo());
+            ?>
             <input type="text" name="nomformulario" value="<?php echo $idf; ?>" id="nomformulario" hidden="">
            <div class="form-group" style="border-width: 10px; background: #C8C0C0;">
                <label for="nombre" class="col-lg-2 control-label"><?php echo strtoupper($estudio->getNom_attributo()); ?></label>
     <div class="col-lg-offset-2 col-lg-10">
-        <?php  if((strcmp($estudio->getNom_attributo(),"fecha_nacimiento")==0)||(strcmp($estudio->getNom_attributo(),"id_paciente")==0)||(strcmp($estudio->getNom_attributo(),"fecha_estudio")==0)||(strcmp($estudio->getNom_attributo(),"edad")==0)){ ?>
+        <?php  if((strcmp($estudio->getNom_attributo(),"id_paciente")==0)||(strcmp($estudio->getNom_attributo(),"fecha_estudio")==0)){ ?>
         <input type="text" class="form-control" value="<?php echo $estudio->getValor(); ?>" name="<?php echo $estudio->getNom_attributo(); ?>" readonly="">        
-       <?php }else if((strcmp($estudio->getTipo(),"float")==0)||(strcmp($estudio->getTipo(),"double")==0)||(strcmp($estudio->getTipo(),"int")==0)){ ?>
+       <?php }else if((strcmp($estudio->getNom_attributo(),"fecha_nac")==0)){ ?>
+        <input type="text" class="form-control" id="datepicker" value="<?php echo $estudio->getValor(); ?>" name="<?php echo $estudio->getNom_attributo(); ?>">        
+       <?php }else if((strcmp($estudio->getNom_attributo(),"edad")==0)){ ?>
+        <input type="text" class="form-control" id="edad" name="edad" value="<?php echo $estudio->getValor(); ?>" name="<?php echo $estudio->getNom_attributo(); ?>">        
+       <?php }
+       else if((strcmp($estudio->getTipo(),"float")==0)||(strcmp($estudio->getTipo(),"double")==0)||(strcmp($estudio->getTipo(),"int")==0)){ ?>
        <input type="text" class="form-control" value="<?php echo $estudio->getValor(); ?>" name="<?php echo $estudio->getNom_attributo(); ?>">      
-           <?php }else { ?>
+           <?php }else if($tab==1){ ?>
+       <select name="<?php echo $estudio->getNom_attributo(); ?>">
+    <?php foreach ($tablas as $tabl => $tabla){
+         if($tabla->getId_atributo()==$estudio->getId_attributo()){
+             if(strcmp($estudio->getValor(),$tabla->getOpcion())==0){ ?>
+           <option  selected value="<?php echo $tabla->getOpcion();?>"><?php echo strtoupper($tabla->getOpcion());?></option>         
+         <?php  }else{ ?>
+       <option value="<?php echo $tabla->getOpcion();?>"><?php echo strtoupper($tabla->getOpcion());?></option>       
+        <?php }}} ?>
+      </select>
+               <?php } else{ ?>
        <input type="<?php echo $estudio->getTipo(); ?>" class="form-control" value="<?php echo $estudio->getValor(); ?>" name="<?php echo $estudio->getNom_attributo(); ?>">        
-               <?php } ?>
+               <?php } ?> 
         </div>
   </div>
  <?php } ?> 
@@ -450,5 +467,6 @@ onSelect: function (date) {
 } );
 
 });
+
 </script>     
 </html>

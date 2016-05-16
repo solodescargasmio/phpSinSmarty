@@ -34,6 +34,16 @@ $(document).ready(function(){
             $id_att=$(".id_att",this).val();
             document.getElementById("atributo").value=$dato;
             document.getElementById("id_attr").value=$id_att;
+            datatyp='atributo='+$id_att;
+              $.ajax({
+         url: 'controlarAjax.php',//llamo a la pagina q hace el control
+         type:'POST',//metodo por el cual paso el dato
+         data:datatyp,
+             success: function (data) { //funcion q recoge la respuesta de la pagina q hace el control
+                  $("#texarea").fadeIn(1000).html(data); //imprimo el mensaje en el div      
+                
+    }
+     });   
             
         });
     });
@@ -77,7 +87,7 @@ return ok;*/
     <div class="container-fluid">
         
           <div id="menus">
-      <div style="float: right;"><h6><font style="color: red;">Haga click sobre el nombre del atributo</font> </h6></div>       
+      <div style="float: right;"><h6><font style="color: red;font-weight: bold;">Haga click sobre el nombre del atributo</font> </h6></div>       
 <!-- Buscar atributo <input type="search" name="buscaratr" id="buscaratr">-->  
    <form id="miform" class="form-horizontal"  method="post" enctype="multipart/form-data">
           <br> <table class="table-responsive" border="1">  
@@ -123,6 +133,7 @@ return ok;*/
    <input type="text" name="atributo" id="atributo" class="form-control" onkeypress="return vacio(event);">
   <input type="text" name="id_attr" id="id_attr" class="form-control" hidden="">
   <br>
+  <div id="texarea"></div>
   <input type="submit" class="btn btn-primary btn-group-sm" value="Guardar modificacion">
        </form>     
   </div> 

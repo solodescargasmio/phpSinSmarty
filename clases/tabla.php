@@ -59,5 +59,30 @@ public function ingresarTabla(){
 } mysqli_close($conexion);
         return $tablas;
  }
+ public function traerTablasId($id) { 
+     $conexion=conectar::realizarConexion();
+      $resultado=$conexion->query("SELECT * FROM tabla WHERE id_attributo=".$id);   
+ while ($fila=$resultado->fetch_object()) {
+         $tabla=new tabla();
+         $tabla->setId_atributo($fila->id_attributo);
+         $tabla->setOpcion($fila->opcion);
+            $tablas[]=$tabla;          
+} mysqli_close($conexion);
+        return $tablas;
+ }
+ 
+  public function eliminarOpciones(){ 
+      $id=$this->getId_atributo();
+      $nom=$this->getOpcion();
+     $conexion=conectar::realizarConexion();
+      $smtp=$conexion->prepare("DELETE FROM tabla WHERE id_attributo=? AND opcion=?");
+  $smtp->bind_param("is",$id,$nom);
+        $smtp->execute();
+        $res=false;
+        if($conexion->affected_rows>0){
+            $res=true;
+        } mysqli_close($conexion);
+        return $res;
+ }
 
 }

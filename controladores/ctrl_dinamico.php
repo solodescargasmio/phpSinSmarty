@@ -563,10 +563,56 @@ function modAtributo(){
      $attr->setNombre($nomb);
      $attr->setId_attributo($id_att);
      $mensage="";
-     if($attr->modificarAtributo()){
-         $mensage="El atributo se modifico de forma correcta.";
-     }else{
-         $mensage="Error al modificar atributo. Verifique";
+     $viejo=$attr->devolverNombre($id_att);
+     if(strcmp($viejo,$nomb)!=0){
+         if($attr->modificarAtributo()){}else{
+         $mensage="Error al modificar nombre de atributo. Verifique";
      }
+     }
+     
+         if($_POST['selectortexto']){
+              $tabla=new tabla();     
+          $resultado=$tabla->traerTablasId($id_att);
+           $arreglo=$_POST['selectortexto'];
+          $dato=explode(",",$arreglo); 
+
+           foreach ($dato as $value){
+               $value=trim($value);
+          $ok=false;
+           foreach ($resultado as $key => $values) {
+               $valu=trim($values->getOpcion());
+           if(strcmp($value,$valu)==0){
+               $ok=true;
+           }   
+       }
+       if(!$ok){
+        $tabla->setId_atributo($id_att);
+        $en=end($value);
+        if((strcmp($en,",")!=0) || (strcmp($en,"")!=0)){
+        $tabla->setOpcion($value);    
+        if($tabla->ingresarTabla()){
+        $mensage="Los datos se agregaron con exito";   
+       }else{
+         $mensage="Error al ingresar los datos. Verifique"; 
+       }
+        
+        }
+       
+       }
+                }
+                
+       $tabla->setId_atributo($id_att);          
+       foreach ($resultado as $key => $values){
+          $valu=trim($values->getOpcion()); 
+          $posicion_coincidencia = strpos($arreglo, $values->getOpcion());
+if ($posicion_coincidencia === false) {
+   $tabla->setOpcion($values->getOpcion());
+   $tabla->eliminarOpciones();
+    }       
+      }                        
+    }  
+       
+         $mensage="El atributo se modifico de forma correcta.";
      header("Location: modAtributo.php?mensage=".$mensage);
 }
+

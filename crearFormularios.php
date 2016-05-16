@@ -95,7 +95,7 @@ return ok;*/
             var $dato= $(".campo",this).val();
             var $dato1= $(".valor",this).val();
             var $id_att=0;
-            $id_att=$(".ids",this).val();
+            $id_att=$(".id_att",this).val();
        da=recorrerDom($dato);
        if(da==0){ //si son distintos lo agrego
            gu="guardo";
@@ -199,7 +199,7 @@ function capitalize(s)//convierte minusculas a Mayusculas
              <tr class="agregar">  
                 <td class="campo1"><a style="cursor:pointer;"><input type="text" name="campo" class="campo" value="<?php echo $value->getNombre()?>" hidden=""><?php echo $value->getNombre();?>    
               &nbsp;&nbsp;&nbsp; &nbsp;<input type="text" name="valor" class="valor" value="<?php echo $value->getTipo(); ?>" hidden=""><?php echo $value->getTipo(); ?></a>         
-           <input type="text" name="id_att" class="id_att" value="<?php echo $value->getId_attributo(); ?>" hidden="">   
+                    <input type="text" name="id_att" class="id_att" value="<?php echo $value->getId_attributo(); ?>" hidden>   
            </td>                   
            </tr>  
 <?php }}?>
@@ -232,15 +232,17 @@ function capitalize(s)//convierte minusculas a Mayusculas
                 </div> 
            
           </div>
-      <h6><font style="color: red;">Para eliminar atributo agregado,<br> doble click sobre el boton |-| al costado de cada atributo</font> </h6>
+        <br><br>
+         <div style="float: right;"><h6><font style="color: red;font-weight: bold;">Para agregar atributo,<br> click sobre el nombre del atributo</font> </h6></div>
+      
+      <h6><font style="color: red;font-weight: bold;">Para eliminar atributo agregado,<br> doble click sobre el boton |-| al costado de cada atributo</font> </h6>
       <?php
                error_reporting(0);
    $mensage=$_GET['mensage'];
    if(isset($mensage)){ ?>
       <font style="color: red;font-weight: bold;"><?php echo $mensage;?></font> 
      <?php } ?>
-      <div style="float: right;"><h6><font style="color: red;">Para agregar atributo,<br> click sobre el nombre del atributo</font> </h6></div>
-       <div id="avizo"></div>
+      <div id="avizo"></div>
       
       <h3>Formulario</h3>
       <form id="my-dynamic-form" method="POST" action="crearFormulario.php" onsubmit="return validarFormulario()"> 

@@ -162,6 +162,16 @@ public function ingresarAtributo(){
         return $dato;
  }
  
+ 
+ public function devolverTabla($id) { 
+     $conexion=conectar::realizarConexion();
+      $resultado=$conexion->query("SELECT tabla FROM atributo WHERE id_attributo=".$id);   
+ while ($fila=$resultado->fetch_object()) {
+         $dato=$fila->tabla;             
+} mysqli_close($conexion);
+        return $dato;
+ }
+ 
   public function devolverTipo($id) { 
      $conexion=conectar::realizarConexion();
       $resultado=$conexion->query("SELECT tipo FROM atributo WHERE id_attributo=".$id);   
@@ -200,7 +210,7 @@ public function ingresarAtributo(){
  public function modificarAtributo(){
         $conexion=conectar::realizarConexion();
         $nombre=$this->getNombre();
-        $id_att=  $this->getId_attributo();
+        $id_att=$this->getId_attributo();
       $conexion=conectar::realizarConexion();
       $smtp=$conexion->prepare("UPDATE atributo SET nombre = ? WHERE id_attributo=?" );
        $smtp->bind_param("si",$nombre,$id_att);

@@ -45,7 +45,7 @@ class form_attr {
 function insertarFormulario() {
         $id_form=$this->getId_form();
         $id_atributo=$this->getId_atributo();
-        $obli=1;
+        $obli=0;
         $conexion=  conectar::realizarConexion();
         $smtp=$conexion->prepare("INSERT INTO form_attr (id_form,id_attributo,obligatorio) VALUES (?,?,?);");
         $smtp->bind_param("iii",$id_form,$id_atributo,$obli);
@@ -85,7 +85,7 @@ return $res;
       function obligatorio() {
         $id_form=$this->getId_form();
         $id_atributo=$this->getId_atributo();
-        $obli=0;
+        $obli=1;
         $conexion=  conectar::realizarConexion();
         $smtp=$conexion->prepare("UPDATE form_attr SET obligatorio =?  WHERE id_form =? AND id_attributo =?");
         $smtp->bind_param("iii",$obli,$id_form,$id_atributo);

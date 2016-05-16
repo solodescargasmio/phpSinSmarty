@@ -48,7 +48,7 @@
     <div class="container-fluid">
         <div class="marco">
             <h3>Sistema de gestión de
-Estudios médicos 
+Estudios Médicos 
 Heterogéneos (TIPay)</h3>
             <img class="imgprincipal" src="./imagenes/header.jpg" alt="Imagen de la universidad">
        

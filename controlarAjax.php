@@ -7,6 +7,7 @@
  */
 require_once ('./clases/formulario.php');
 require_once ('./clases/atributo.php');
+require_once ('./clases/tabla.php');
 require_once ('./clases/admin.php');
 require_once ('./clases/estudio_medico.php');
 require_once ('./clases/dependencia.php');
@@ -201,7 +202,28 @@ $form=$formula->traerFormularioId();
             if($admin!=null){
  echo '<img src="./imagenes/no.png"/><font style="color:red;font-weight: bold;"> El usuario ya existe en el sistema</font>';     
         }    
-            }
+            }else
+                if($_POST['atributo']){
+                    $id_attr=$_POST['atributo'];
+                    $atributo=new atributo();
+                    $tabla=new tabla();
+                    if($atributo->devolverTabla($id_attr)==1){
+                $resultado=$tabla->traerTablasId($id_attr);
+                $can=  count($resultado);
+                $con=0;
+                echo '<font style="color: red;font-weight: bold;">   Separe con comas (",")<br>No deje puntos ni comas al final de lo ingresado.<br></font> <br>'
+                . '<textarea id="selectortexto" name="selectortexto">';
+                foreach ($resultado as $key => $value) {
+                    $con++;
+                    echo $value->getOpcion();
+                    if($con<$can){
+                      echo ', ';    
+                    }
+                                      
+                }
+                echo '</textarea>';
+               }
+              }
 
      
             

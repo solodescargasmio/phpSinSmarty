@@ -212,7 +212,7 @@ overflow: auto;
           <a tabindex="-1" href="crearFormularios.php">Crear Formularios</a></li>
               <li><a tabindex="-1" href="version.php">Nueva Version Formulario</a></li>
               <li><a tabindex="-1" href="ingatributos.php">Crear Atributo</a></li>
-              <li><a tabindex="-1" href="modAtributo.php">Modificar Nombre Atributos</a></li>
+              <li><a tabindex="-1" href="modAtributo.php">Modificar Atributos</a></li>
               <li><a tabindex="-1" href="dependencia.php">Dependencia Formulario</a></li>
               </font>
             </ul> 

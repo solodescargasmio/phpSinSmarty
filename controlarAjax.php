@@ -211,7 +211,7 @@ $form=$formula->traerFormularioId();
                 $resultado=$tabla->traerTablasId($id_attr);
                 $can=  count($resultado);
                 $con=0;
-                echo '<font style="color: red;font-weight: bold;">   Separe con comas (",")<br>No deje puntos ni comas al final de lo ingresado.<br></font> <br>'
+                echo '<font style="color: red;font-weight: bold;">   Separe con comas (",")<br>No deje puntos ni comas al final de lo ingresado.<br>Para eliminar un item, solo borrelo de la lista.</font> <br>'
                 . '<textarea id="selectortexto" name="selectortexto">';
                 foreach ($resultado as $key => $value) {
                     $con++;

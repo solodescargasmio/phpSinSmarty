@@ -49,7 +49,7 @@
         <div class="marco">
             <h3>Sistema de gestión de
 Estudios Médicos 
-Heterogéneos (TIPay)</h3>
+Heterogéneos </h3>
             <img class="imgprincipal" src="./imagenes/header.jpg" alt="Imagen de la universidad">
        
                <?php
@@ -104,7 +104,8 @@ Heterogéneos (TIPay)</h3>
         </div>
         <br>
     </div>
- 
+
+<?php include 'footer.php';?>
 </body>
 
 </html>

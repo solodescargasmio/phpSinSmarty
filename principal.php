@@ -21,7 +21,7 @@
 
 <body>
   
- <font style="font-weight: bold;">  <div class="container-fluid" style="background: #fff; opacity: 0.8; height: 100%;">
+ <font style="font-weight: bold;">  <div class="container-fluid" style="background: #AEABAB; height: 100%;">
    <?php include 'cabezal.php'; ?>
         <div class="row">
          <?php
@@ -155,6 +155,7 @@ require_once ('./clases/datosPrecargados.php');
 //    }); 
     });
     </script>
+    <?php include 'footer.php';?>
 </body>
 
 </html>

@@ -137,6 +137,6 @@ return ok;*/
   <input type="submit" class="btn btn-primary btn-group-sm" value="Guardar modificacion">
        </form>     
   </div> 
-         
+    <?php include 'footer.php';?>     
 </body>
 </html>

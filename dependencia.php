@@ -118,6 +118,7 @@ require_once ('./clases/dependencia.php');
       <font style="color: red;font-weight: bold;"><?php echo $mensage;?></font> 
      <?php } ?>
         
-      </div>             
+      </div>   
+    <?php include 'footer.php';?>
 </body>
 </html>

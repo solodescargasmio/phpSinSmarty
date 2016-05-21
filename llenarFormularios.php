@@ -435,7 +435,7 @@ $ok=true;
       
 <?php } ?>
     </div>
-
+<?php include 'footer.php';?>
 </body>
  <link href="css/dateFechamio.css" rel="stylesheet">
  <script src="js/dateFechamio.js"></script>

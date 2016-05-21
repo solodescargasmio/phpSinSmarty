@@ -79,5 +79,6 @@ require_once ('./clases/atributo.php');
        <?php   }
        ?>
        </div>
+    <?php include 'footer.php';?>
 </body>
 </html>

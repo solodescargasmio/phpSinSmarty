@@ -13,6 +13,17 @@ html{
        // opacity: 0.8;
     
 }
+ .footer {
+     font-weight: bold;
+          width: 100%;
+          height: 10%;
+          background: #fff;
+            position: fixed;
+            bottom: 0;
+            text-align: center;
+            /* Altura total del footer en px con valor negativo */
+
+        }
         .encuadro{
             float: right;
         background: #c3defe;
@@ -49,8 +60,8 @@ html{
 body {
 height: 100%;
     margin-top: 0px;
-     background-color: #fff;
-     opacity: 0.95;
+     background-color: #AEABAB;
+     opacity: 0.96;
 }
 .cajita{
 /*    background: #0000ff;*/

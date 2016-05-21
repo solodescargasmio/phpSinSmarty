@@ -231,6 +231,7 @@ error_reporting(0);
       <h3>Formulario</h3>
       <form id="my-dynamic-form" method="POST" action="nuevaVersion.php" onsubmit="return validarFormulario()"> 
       </form>
-       </div> 
+       </div>
+    <?php include 'footer.php';?>
 </body>
 </html>

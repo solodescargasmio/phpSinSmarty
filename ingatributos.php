@@ -140,5 +140,6 @@ return ok;*/
    if(isset($mensage)){?>
    <font style="color: red;font-weight: bold;"><?php echo $mensage;?></font><?php } ?> 
       </div>
+        <?php include 'footer.php';?>
     </body>
 </html>

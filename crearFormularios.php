@@ -249,6 +249,6 @@ function capitalize(s)//convierte minusculas a Mayusculas
       </form>
          
        </div> 
-         
+      <?php include 'footer.php';?>   
 </body>
 </html>

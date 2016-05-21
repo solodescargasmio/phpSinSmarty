@@ -114,5 +114,6 @@ Tu navegador no soporta este tipo de video.
    
        <?php  }} ?>
     </div>
+    <?php include 'footer.php';?>
 </body>
 </html>

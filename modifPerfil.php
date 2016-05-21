@@ -106,6 +106,7 @@ require_once ('./clases/session.php');
         </form>
  
     </div>
+    <?php include 'footer.php';?>
 </body>
 
 </html>

@@ -37,9 +37,9 @@ $form=$formula->traerFormularioId();
       echo '<label  class="col-sm-8 control-label">'.strtoupper($value->getNombre()).'</label>';
        echo '<div class="col-lg-10">';
        echo '<input type="text" id="'.$value->getNombre().'" name="'.$value->getNombre().'" value="'.$value->getTipo().'" readonly=>';
-        echo'<input type="button" id="'.$value->getNombre().'" value="-" style="color: red;" name="eliminar" ident="'.$value->getNombre().'" onclick="eliminarElementoDom()"></div></div>';
-     
-        }
+     // if((strcmp($value->getNombre(),"id_paciente")!=0)||(strcmp($value->getNombre(),"fecha_estudio")!=0) || (strcmp($value->getNombre(),"edad")!=0)||(strcmp($value->getNombre(),"peso")!=0)||(strcmp($value->getNombre(),"altura")!=0)||(strcmp($value->getNombre(),"fecha_nac")!=0)){
+      echo'<input type="button" id="'.$value->getNombre().'" value="-" style="color: red;" name="eliminar" ident="'.$value->getNombre().'" onclick="eliminarElementoDom()"></div></div>';}
+
         }else
             if($_POST['user']){
                 $id_paciente=$_POST['user'];

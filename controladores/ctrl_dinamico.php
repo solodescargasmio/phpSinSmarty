@@ -616,3 +616,17 @@ if ($posicion_coincidencia === false) {
      header("Location: modAtributo.php?mensage=".$mensage);
 }
 
+function modNomForm(){
+    $nombre=trim($_POST['viejo']);
+    $nuevo=trim($_POST['nuevo']);
+    $form=new formulario();
+     $mensage="";
+    $form->setNombre($nombre);
+    if($form->modificarNombre($nuevo)){
+      $mensage="El nombre se modifico de forma correcta.";   
+    }else{
+        $mensage="Error al modificar. Verifique"; 
+    }   
+     header("Location: modNombreForm.php?mensage=".$mensage);
+}
+

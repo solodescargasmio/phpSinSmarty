@@ -181,5 +181,19 @@ class formulario {
         return $formularios;
  }
  
+  public function modificarNombre($nuevo){
+        $conexion=conectar::realizarConexion();
+        $nombre=$this->getNombre();
+      $conexion=conectar::realizarConexion();
+      $smtp=$conexion->prepare("UPDATE form SET nombre = ? WHERE nombre = ?" );
+       $smtp->bind_param("ss",$nuevo,$nombre);
+       $smtp->execute();
+       $res=false;
+      if($conexion->affected_rows>0){
+       $res=true;
+       }
+       return $res;
+ }
  
+ /*UPDATE `phpfinal`.`form` SET `nombre` = 'sadi' WHERE `form`.`nombre` = 'sad';*/
 }

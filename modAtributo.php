@@ -7,7 +7,7 @@ and open the template in the editor.
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Estudios Médicos||Crear Formularios</title>
+        <title>Estudios Médicos||Modificar Atributos</title>
  <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
  <script src="js/jquery.js" type="text/javascript"></script>  
  <link href="css/dashboard.css" rel="stylesheet">

@@ -119,6 +119,6 @@ require_once ('./clases/dependencia.php');
      <?php } ?>
         
       </div>   
-    <?php include 'footer.php';?>
+   
 </body>
 </html>

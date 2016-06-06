@@ -97,7 +97,7 @@ function ingresarAtributo() {
         $tabla->setId_atributo($id_attributo);
         $tabla->setOpcion($value);
        if($tabla->ingresarTabla()){
-        $mensage="Los datos se agregaron con exito";   
+        $mensage="Los datos se agregaron con éxito";   
        }else{
            $mensage="Error al ingresar los datos. Verifique"; 
        }
@@ -112,7 +112,7 @@ function ingresarAtributo() {
     $atr->setCalculado(0);
     $atr->setTabla(0);
     if($atr->ingresarAtributo()){//eliminar esto para que vuelva al mismo lugar
-        $mensage="Los datos se agregaron con exito";
+        $mensage="Los datos se agregaron con éxito";
     } else{
   $mensage="Error al ingresar atributo. Verifique.";        
     } }
@@ -156,7 +156,7 @@ $nombre=str_replace(' ','_',$nombr);
         $form->setNombre($nombre);
         $con=$form->traerCantidad(); 
         if($con>0){
-            $mensage="El formulario ya existe, ingrese una version nueva";
+            $mensage="El formulario ya existe, ingrese una versión nueva";
         }else{
         $version=1;
         $form->setVersion($version);
@@ -170,7 +170,7 @@ foreach ($dato as $key => $value){
      $fo_att->setId_atributo($key);
      $fo_att->insertarFormulario();
      $fo_att->obligatorio();
-      $mensage="Los datos se guardaron con exito."; 
+      $mensage="Los datos se guardaron con éxito."; 
  }
  else{ 
         $attr=new atributo();
@@ -178,7 +178,7 @@ foreach ($dato as $key => $value){
         $fo_att->setId_atributo($ida); 
       //  var_dump();
         $fo_att->insertarFormulario();
-         $mensage="Los datos se guardaron con exito."; 
+         $mensage="Los datos se guardaron con éxito."; 
     }
 ///////////////////////////////////////////////
     }
@@ -244,7 +244,7 @@ function nuevaVersion(){
  if($resultado==null){
           $mensage="Aun no hay atributos.<br> Ingrese atributos en la base de datos.";  
         }
-        if($ok){$mensage="Los datos se guardaron con exito.";}else{
+        if($ok){$mensage="Los datos se guardaron con éxito.";}else{
           $mensage="Error al ingresar los datos. Verifique.";  
         }
        header('Location: version.php?mensage='.$mensage);  
@@ -268,7 +268,7 @@ function dependenciasForm(){
        $fromu=new formulario();      
        $depen=new dependencia();
        if($depen->insertarDependencias($dato1, $dato2)){
-        $mensage="Los datos fueron agregados con exito";    
+        $mensage="Los datos fueron agregados con éxito";    
        }else{
            $mensage="No se pudo agregar la dependencia. Verifique"; 
        }
@@ -278,7 +278,7 @@ function dependenciasForm(){
         $id=$_GET['ide'];
        $depen=new dependencia();
        if($depen->eliminarDepende($id)){
-           $mensage="La dependencia se elimino con exito.";
+           $mensage="La dependencia se eliminó con éxito.";
        }else{
         $mensage="No se pudo eliminar la dependencia. Verifique";   
        }
@@ -394,7 +394,7 @@ subirDatos($idf);
          $selectos[]=$values;
           }}
         if($resultado==null){
-          $mensage="No existen atributos para este formulario.<br> Ingrese una nueva version del formulario.";  
+          $mensage="No existen atributos para este formulario.<br> Ingrese una nueva versión del formulario.";  
         }
            //
         }
@@ -518,10 +518,10 @@ function eliminar(){
         $idf=$estudio->traerIdFormEcho($nomb);
         if($estudio->eliminarFormulario($nomb)){ 
             eliminarFormulario($idf);
-            $mensage="El formulario se elimino con exito"; 
+            $mensage="El formulario se eliminó con éxito"; 
           
         }else{
-          $mensage="Ocurrio un error al intentar eliminar el formulario, verifique";  
+          $mensage="Ocurrió un error al intentar eliminar el formulario, verifique";  
         }
         
         }else if($_GET['id_est']){
@@ -536,9 +536,9 @@ function eliminar(){
            }
            
             cerrar();
-            $mensage="El estudio se elimino con exito"; 
+            $mensage="El estudio se eliminó con éxito"; 
         }else{
-          $mensage="Ocurrio un error al intentar eliminar el estudio, verifique";  
+          $mensage="Ocurrió un error al intentar eliminar el estudio, verifique";  
         }
     }else if($_GET['id_pac']){  
         $id_paciente=$_GET['id_pac']; 
@@ -546,7 +546,7 @@ function eliminar(){
            $carpeta=Ruta."/".$id_user."/"; 
         eliminarDirectorio($carpeta);
         cerrar();
-            $mensage="El paciente se elimino con exito"; 
+            $mensage="El paciente se eliminó con éxito"; 
         }else{
           $mensage="Ocurrio un error al intentar eliminar el paciente, verifique";  
         } 
@@ -591,7 +591,7 @@ function modAtributo(){
         if((strcmp($en,",")!=0) || (strcmp($en,"")!=0)){
         $tabla->setOpcion($value);    
         if($tabla->ingresarTabla()){
-        $mensage="Los datos se agregaron con exito";   
+        $mensage="Los datos se agregaron con éxito";   
        }else{
          $mensage="Error al ingresar los datos. Verifique"; 
        }
@@ -612,7 +612,7 @@ if ($posicion_coincidencia === false) {
       }                        
     }  
        
-         $mensage="El atributo se modifico de forma correcta.";
+         $mensage="El atributo se modificò de forma correcta.";
      header("Location: modAtributo.php?mensage=".$mensage);
 }
 
@@ -623,7 +623,7 @@ function modNomForm(){
      $mensage="";
     $form->setNombre($nombre);
     if($form->modificarNombre($nuevo)){
-      $mensage="El nombre se modifico de forma correcta.";   
+      $mensage="El nombre se modificó de forma correcta.";   
     }else{
         $mensage="Error al modificar. Verifique"; 
     }   

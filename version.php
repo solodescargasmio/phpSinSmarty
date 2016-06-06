@@ -146,7 +146,7 @@ function eliminarElementoDom($id_att) {
     if(con>2){
         ok=true;
     }else{
-        alert('Debe agregar al menos un atributo al formulario.\n Si no sabe como hacerlo, lea el manual en Ingreso');
+        alert('Debe agregar al menos un atributo al formulario.\n Si no sabe cómo hacerlo, lea el manual en Ingreso');
         ok=false;
     }
      return ok;
@@ -217,7 +217,7 @@ function capitalize(s)//convierte minusculas a Mayusculas
                 </div> 
            
           </div>
-      <h6><font style="color: red;font-weight: bold;">Para eliminar atributo agregado,<br> doble click sobre el boton |-| al costado de cada atributo</font> </h6>
+      <h6><font style="font-weight: bold;">Para eliminar atributo agregado,<br> doble clic sobre el botón |-| al costado de cada atributo</font> </h6>
       
      <?php
 error_reporting(0);
@@ -225,7 +225,7 @@ error_reporting(0);
    if(isset($mensage)){ ?>
       <font style="color: red;font-weight: bold;"><?php echo $mensage;?></font> 
      <?php } ?>
-      <div style="float: right;"><h6><font style="color: red;font-weight: bold;">Para agregar atributo,<br> click sobre el nombre del atributo</font> </h6></div>
+      <div style="float: right;"><h6><font style="font-weight: bold;">Para agregar atributo,<br> clic sobre el nombre del atributo</font> </h6></div>
        <div id="avizo"></div>
       
       <h3>Formulario</h3>

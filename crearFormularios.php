@@ -233,9 +233,9 @@ function capitalize(s)//convierte minusculas a Mayusculas
            
           </div>
         <br><br>
-         <div style="float: right;"><h6><font style="color: red;font-weight: bold;">Para agregar atributo,<br> click sobre el nombre del atributo</font> </h6></div>
+         <div style="float: right;"><h6><font style="font-weight: bold;">Para agregar atributo,<br> clic sobre el nombre del atributo</font> </h6></div>
       
-      <h6><font style="color: red;font-weight: bold;">Para eliminar atributo agregado,<br> doble click sobre el boton |-| al costado de cada atributo</font> </h6>
+      <h6><font style="font-weight: bold;">Para eliminar atributo agregado,<br> doble clic sobre el botón |-| al costado de cada atributo</font> </h6>
       <?php
                error_reporting(0);
    $mensage=$_GET['mensage'];

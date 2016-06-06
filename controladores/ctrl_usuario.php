@@ -43,12 +43,12 @@ function ingresar(){
                 }
                 header('Location: principal.php');
         }else {
-        $mensage="Error en Contraseña.<br> El enlace a continuacion, envia una nueva contraseña a su correo registrado.<br>
-                Utilizelo SOLO si no recuerda su contraseña. <a href='olvidePass.php?nick=$user'>Olvide mi contraseña</a>";     
+        $mensage="Error en Contraseña.<br> El enlace a continuación, envía una nueva contraseña a su correo registrado.<br>
+                Utilícelo solo si no recuerda su contraseña. <a href='olvidePass.php?nick=$user'>Olvide mi contraseña</a>";     
         header("Location: index.php?mensage=".$mensage);
         }
       }else{
-   $mensage="Error en Usuario.<br> Verifíque o comuniquese con el administrador de la Base de Datos";             
+   $mensage="Error en Usuario.<br> Verifique o comuníquese con el administrador de la Base de Datos";             
      header("Location: index.php?mensage=".$mensage);   }
     }
 }
@@ -75,7 +75,7 @@ function olvidoPass(){//120704admin
                     $usr->setPass(sha1($pass));
                     if($usr->modificarPass()){
                     $cuerpo="Su nueva password es : ".$pass."<br>Ingrese "
-                            . "<a href='http://localhost/sinSmarty/index.php'>aquí</a> con su usuario y la nueva password y luego modifique su password por una mas segura,"
+                            . "<a href='http://localhost/sinSmarty/index.php'>aqui</a> con su usuario y la nueva password y luego modifique su password por una mas segura,"
                             . "<br>Gracias";
                     require_once ('./clases/enviarPHPmailer.php');
                     $envio=new enviarPHPmailer();
@@ -120,7 +120,7 @@ function modificarPerfil(){
          $ad->setPass($pass);  
        }  
        if(!$ad->modificarPerfil($viejo)){   
-       $mensage="Error al modificar sus datos. Verifique o contactese con el administrador de la Base de Datos";
+       $mensage="Error al modificar sus datos. Verifique o contáctese con el administrador de la Base de Datos";
  }
  header("Location: principal.php");
      }
@@ -150,7 +150,7 @@ function registrar(){
        $ad->setTipo($tipo);
        
        if($ad->registrar()){ 
-           $mensage="El registro se realizo con exito.";
+           $mensage="El registro se realizo con éxito.";
           header("Location: registrar.php?mensage=".$mensage);
        }else{
            $mensage="Error al registrar usuario. Verifique e intentelo nuevamente.";

@@ -19,7 +19,7 @@ $formula=new formulario();
 $formula->setNombre($nomb);
 $form=$formula->traerFormularioId();
         if(isset($form)){
- echo '<br><h4><font style="color:red;">El formulario ya existe en base de datos<br> Puede ingresar una nueva version presionando Nueva Version </font></h4>';     
+ echo '<br><h4><font style="color:red;">El formulario ya existe en base de datos<br> Puede ingresar una nueva versión presionando Nueva Versión </font></h4>';     
         }
 }
         else
@@ -190,7 +190,7 @@ $form=$formula->traerFormularioId();
                 $admin->setNick($id_paciente);
                 $admin=$admin->traerAdmin();       
            if($admin==null){
- echo '<img src="./imagenes/no.png"/><font style="color:red;font-weight: bold;"> Error en usuario, el sistema reconoce mayusculas y minusculas. Verifique</font>';     
+ echo '<img src="./imagenes/no.png"/><font style="color:red;font-weight: bold;"> Error en usuario, el sistema reconoce mayúsculas y minúsculas. Verifique</font>';     
         }else{
             echo '<img src="./imagenes/si.png"/>';}     
             } else
@@ -211,7 +211,7 @@ $form=$formula->traerFormularioId();
                 $resultado=$tabla->traerTablasId($id_attr);
                 $can=  count($resultado);
                 $con=0;
-                echo '<font style="color: red;font-weight: bold;">   Separe con comas (",")<br>No deje puntos ni comas al final de lo ingresado.<br>Para eliminar un item, solo borrelo de la lista.</font> <br>'
+                echo '<font style="color: red;font-weight: bold;">   Separe con comas (",")<br>No deje puntos ni comas al final de lo ingresado.<br>Para eliminar un ítem, solo bórrelo de la lista.</font> <br>'
                 . '<textarea id="selectortexto" name="selectortexto">';
                 foreach ($resultado as $key => $value) {
                     $con++;

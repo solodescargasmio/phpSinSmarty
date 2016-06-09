@@ -16,7 +16,7 @@ and open the template in the editor.
 
     <?php include 'cabezal.php';?>
     <div class="container-fluid" style="position: absolute;top: 25%;">
-        <h3>Seleccione la version del formulario con el cual trabajara</h3>
+        <h3>Seleccione la versión del formulario con el cual trabajará</h3>
     <?php 
     require_once ('./clases/formulario.php');
 require_once ('./clases/tabla.php');
@@ -41,7 +41,7 @@ require_once ('./clases/atributo.php');
               <div class="modal-content">
                   <div class="modal-header">
 
-                  <h4><font style="color: blue;">Utilizar este formulario :<?php echo '  Version:'.$formu->getVersion();?></font></h4>  
+                  <h4><font style="color: blue;">Utilizar este formulario :<?php echo '  Versión:'.$formu->getVersion();?></font></h4>  
                   <p>Creado : <?php echo $formu->getFecha_crea();?></p>
                   </div>
                 <form >   

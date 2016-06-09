@@ -28,7 +28,9 @@ $mail->Username = Email;
 $mail->Password = Epass;
 $mail->SMTPSecure = 'tls';
 $mail->From       = Email;
-$mail->FromName   = 'Estudios medicos o algo asi'; 
+$mail->FromName   = 'Sistema de gestión de
+Estudios Médicos 
+Heterogéneos'; 
 $mail->addAddress($email, $usr->getNombre() ." ". $usr->getApellido());
 $mail->WordWrap   = 50;
 $mail->isHTML(true);

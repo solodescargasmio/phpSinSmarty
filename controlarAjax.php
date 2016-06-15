@@ -138,7 +138,7 @@ $form=$formula->traerFormularioId();
                } 
  ///////////////////////////////////////////////////////////////////////////////////                
             } //fin if else ca>1
-            echo '<input type="submit" value="<<Crear un NUEVO ESTUDIO para este paciente Cedula: '.$id_paciente.'>>" class="btn btn-primary" onClick=window.location="crearestudio.php?idpaciente='.$id_paciente.'">'; 
+            echo '<input type="submit" value="<<Crear un NUEVO ESTUDIO para este paciente Cédula: '.$id_paciente.'>>" class="btn btn-primary" onClick=window.location="crearestudio.php?idpaciente='.$id_paciente.'">'; 
               
                  }else
             if($_POST['idtraers']){
@@ -180,7 +180,7 @@ $form=$formula->traerFormularioId();
  
  ///////////////////////////////////////////////////////////////////////////////////                
  
-         echo '<input type="submit" value="<<Crear un NUEVO ESTUDIO para este paciente Cedula: '.$id_paciente.'>>" class="btn btn-primary" onClick=window.location="crearestudio.php?idpaciente='.$id_paciente.'">';  
+         echo '<input type="submit" value="<<Crear un NUEVO ESTUDIO para este paciente Cédula: '.$id_paciente.'>>" class="btn btn-primary" onClick=window.location="crearestudio.php?idpaciente='.$id_paciente.'">';  
                  }else
             if($_POST['admin']){
  

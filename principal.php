@@ -45,15 +45,15 @@ require_once ('./clases/datosPrecargados.php');
         if (is_null($cedula)){
      ?>   
  
-                    <h3><font style="color: #000;">Proyecto Final Estudios Medicos</h3>
+                    <h3><font style="color: #000;">Proyecto Final Estudios Médicos</h3>
                     <br>    
                      <input type="submit" value="<<Ingresar nuevo paciente>>" class="btn btn-primary" onClick="window.location='llenarFormularios.php?nombre=paciente'">              
                      <br><br>     
                     <legend>Pacientes en Sistema</legend></font>
       <div class="form-group">
-    <label for="nombre" class="col-lg-2 control-label">Seleccione cedula del paciente con el cual va a trabajar o click en la LUPA arriba a la derecha</label>
+    <label for="nombre" class="col-lg-2 control-label">Seleccione cédula del paciente con el cual va a trabajar o clic en la LUPA arriba a la derecha</label>
     <div class="col-lg-10">
-        <select id="elejir"><option>Seleccione una opcion</option>
+        <select id="elejir"><option>Seleccione una opción</option>
            <?php 
             $estudio=new estudio_medico();
     $estud=$estudio->traerPacientes(); 
@@ -114,7 +114,7 @@ require_once ('./clases/datosPrecargados.php');
  
  ///////////////////////////////////////////////////////////////////////////////////                
  
-         echo '<input type="submit" value="<<Crear un NUEVO ESTUDIO para este paciente Cedula: '.$id_paciente.'>>" class="btn btn-primary" onClick=window.location="crearestudio.php?idpaciente='.$id_paciente.'">';  
+         echo '<input type="submit" value="<<Crear un NUEVO ESTUDIO para este paciente Cédula: '.$id_paciente.'>>" class="btn btn-primary" onClick=window.location="crearestudio.php?idpaciente='.$id_paciente.'">';  
             
        } ?>
         <div id="respuestauser"></div>

@@ -27,7 +27,7 @@ return false;
     </head>
     <body>
          <?php include 'cabezal.php';?>
-        <div class="container-fluid" style="position: absolute;top: 25%;">
+        <div class="container-fluid" style="position: absolute;top: 30%;">
         <?php
        require_once ('./clases/session.php');
 require_once ('./clases/tabla.php');

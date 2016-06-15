@@ -15,7 +15,7 @@ and open the template in the editor.
 <body>
 
     <?php include 'cabezal.php';?>
-    <div class="container-fluid" style="position: absolute;top: 25%;">
+    <div class="container-fluid" style="position: absolute;top: 30%;">
         <h3>Seleccione la versión del formulario con el cual trabajará</h3>
     <?php 
     require_once ('./clases/formulario.php');

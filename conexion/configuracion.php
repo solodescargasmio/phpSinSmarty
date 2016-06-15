@@ -12,8 +12,9 @@
         
         
  //correo para el olvido de contraseña (correo que se usa para enviar, debe ser gmail)
-        define("Email",'Aca su gmail');
-        define("Epass", 'Aca la pass de su gmail');
+        define("Email_HOST",'smtp.gmail.com');
+        define("Email",'Aca su mail');
+        define("Epass", 'Aca la pass de su mail');
         
 //rutas para las carpetas (Aca se generan las carpetas que guardan los videos, imagenes, ect.)       
 define("Ruta","./multimedia");      

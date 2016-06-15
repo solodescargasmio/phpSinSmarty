@@ -24,7 +24,7 @@
 <body>
 
     <?php include 'cabezal.php'; ?> 
-     <div class="container-fluid" style="position: absolute;top: 25%;">
+     <div class="container-fluid" style="position: absolute;top: 30%;">
         <div id="respuestauser"></div>
     <?php 
     $nombre=$_GET['nombre'];

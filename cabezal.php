@@ -113,7 +113,7 @@ overflow: auto;
             <font style="font-weight: bold;">        
         <font style="color: #fff;">
         Usuario: <?php echo $nick; ?></font><br>
-    <a tabindex="-1" class="navbar-brand" href="cerrarSesion.php">Cerrar sesion</a>
+    <a tabindex="-1" class="navbar-brand" href="cerrarSesion.php">Cerrar Sesión</a>
         </div>
         <?php }; ?>
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -132,7 +132,7 @@ overflow: auto;
              
         <?php
      if(isset($nick)){ ?>
-        <a tabindex="-1" class="navbar-brand" href="principal.php">Pagina Principal</a> 
+        <a tabindex="-1" class="navbar-brand" href="principal.php">Página Principal</a> 
         <?php }; 
        if(strcmp($operador,"admin")==0){ ?>
         <a tabindex="-1" class="navbar-brand" href="registrar.php">Registrar Usuario</a> 
@@ -210,7 +210,7 @@ overflow: auto;
            <ul class="dropdown-menu">
       <font style="font-weight: bold;"><li>
           <a tabindex="-1" href="crearFormularios.php">Crear Formularios</a></li>
-              <li><a tabindex="-1" href="version.php">Nueva Version Formulario</a></li>
+              <li><a tabindex="-1" href="version.php">Nueva Versión Formulario</a></li>
               <li><a tabindex="-1" href="modNombreForm.php">Modificar Nombre Formulario</a></li>
               <li><a tabindex="-1" href="ingatributos.php">Crear Atributo</a></li>
               <li><a tabindex="-1" href="modAtributo.php">Modificar Atributos</a></li>

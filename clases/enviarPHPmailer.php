@@ -22,15 +22,15 @@ class enviarPHPmailer {
         $usr=$usr->traerAdmin();
 $mail = new PHPMailer;
 $mail->isSMTP();
-$mail->Host = 'smtp.gmail.com';
+$mail->Host = Email_HOST;
 $mail->SMTPAuth = true;
 $mail->Username = Email;
 $mail->Password = Epass;
 $mail->SMTPSecure = 'tls';
 $mail->From       = Email;
-$mail->FromName   = 'Sistema de gestión de
-Estudios Médicos 
-Heterogéneos'; 
+$mail->FromName   = 'Sistema de gestion de
+Estudios Medicos 
+Heterogeneos'; 
 $mail->addAddress($email, $usr->getNombre() ." ". $usr->getApellido());
 $mail->WordWrap   = 50;
 $mail->isHTML(true);

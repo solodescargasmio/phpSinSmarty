@@ -204,7 +204,7 @@ return patron.test(n);
 
 <body>
    <?php include 'cabezal.php';?>
-    <div class="container-fluid" style="position: absolute;top: 25%;">
+    <div class="container-fluid" style="position: absolute;top: 30%;">
         <div id="respuestauser"></div>
         <?php 
         error_reporting(0);
@@ -315,7 +315,7 @@ $ok=true;
           ?>
                     <div class="form-group" style="border-width: 10px; background:#C8C0C0;">
     <label for="nombre" class="col-lg-2 control-label"><?php echo strtoupper($atributo->getNombre());?>:</label>
-    <div class="col-lg-10">
+    <br><div class="col-lg-10">
 
         
         <?php

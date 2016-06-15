@@ -35,7 +35,7 @@ require_once ('./clases/dependencia.php');
 require_once ('./clases/datosPrecargados.php');
    $mensage=$_GET['mensage'];
    if(isset($mensage)){ ?>
-      <font style="color: red;font-weight: bold;"><?php echo $mensage;?></font> 
+      <font style="font-weight: bold;"><?php echo $mensage;?></font> 
      <?php }
     
       $id_user=Session::get('cedula');

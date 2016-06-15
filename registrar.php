@@ -45,7 +45,7 @@
 <body>
  
     <?php include 'cabezal.php';?>
-    <div class="container-fluid" style="position: absolute;top: 25%;">
+    <div class="container-fluid" style="position: absolute;top: 30%;">
    <?php
                error_reporting(0);
    $mensage=$_GET['mensage'];

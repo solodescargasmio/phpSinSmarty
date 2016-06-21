@@ -516,7 +516,7 @@ function eliminar(){
     if($_GET['form']){
         $nomb=$_GET['form'];
         $idf=$estudio->traerIdFormEcho($nomb);
-        if($estudio->eliminarFormulario($nomb)){ 
+        if($estudio->eliminarFormulario($nomb,$numero)){ 
             eliminarFormulario($idf);
             $mensage="<p style='color: green;'>El formulario se eliminó con éxito</p>"; 
           

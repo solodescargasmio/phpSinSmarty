@@ -425,11 +425,11 @@ $smtp->bind_param("i",$id_estudio);
        return $res;
   }
   
-  public function eliminarFormulario($nombre) {
+  public function eliminarFormulario($nombre,$id_estudio) {
       $id_form=  $this->traerIdFormEcho($nombre);
      $conexion=conectar::realizarConexion();
-      $smtp=$conexion->prepare("DELETE FROM estudio_atributo WHERE id_form=?");   
-$smtp->bind_param("i",$id_form);
+      $smtp=$conexion->prepare("DELETE FROM estudio_atributo WHERE id_form=? AND id_estudio=?");   
+$smtp->bind_param("ii",$id_form,$id_estudio);
       $smtp->execute();
       $res=false;
        if($conexion->affected_rows>0){

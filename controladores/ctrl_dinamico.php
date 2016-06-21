@@ -97,7 +97,7 @@ function ingresarAtributo() {
         $tabla->setId_atributo($id_attributo);
         $tabla->setOpcion($value);
        if($tabla->ingresarTabla()){
-        $mensage="Los datos se agregaron con éxito";   
+        $mensage="<p style='color: green;'>Los datos se agregaron con éxito</p>";   
        }else{
            $mensage="<p style='color: red;'>Error al ingresar los datos. Verifique</p>"; 
        }

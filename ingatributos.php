@@ -21,7 +21,8 @@ and open the template in the editor.
              $("#mostrar").hide();
              $("#ocultar").show();
              
-                $("#ocultar").click(function(){
+                $("#ocultar").click(function(){     
+                $("#msg").hide();
                 $("#myform1").hide();
                 $("#mostrar").show();
                 $("#myform2").show();
@@ -95,7 +96,7 @@ return ok;*/
       <div class="form-group">     
        <label  class="col-sm-4 control-label">Nombre del atributo</label>
                     <div class="col-sm-8">
-                        <input type="text" onkeypress="return vacio(event);" name="nombre" id="nombre" placeholder="Ej: direccion (Sin espacios o caracteres raros)" class="success" size ="50">
+                        <input type="text" onkeypress="return vacio(event);" name="nombre" id="nombre" placeholder="Ej: direccion (Sin espacios o caracteres extraños)" class="success" size ="50">
                    </div> 
                 </div> 
       
@@ -121,7 +122,7 @@ return ok;*/
       <div class="form-group">     
        <label  class="col-sm-4 control-label">Nombre de la tabla</label>
                     <div class="col-sm-8">
-  <input type="text" onkeypress="return vacio(event);" name="nombre" id="nombrecom" placeholder="Ej: sexo (Sin espacios o caracteres raros)" class="success" size ="50">
+  <input type="text" onkeypress="return vacio(event);" name="nombre" id="nombrecom" placeholder="Ej: sexo (Sin espacios o caracteres extraños)" class="success" size ="50">
                    </div> 
                 </div> 
       
@@ -134,11 +135,11 @@ return ok;*/
                 </div>   
       <input type="submit" onclick="return confirmarCompuesto();" value="Enviar" class="btn btn-primary btn-group-justified">
             </form>
-          <?php 
+   <div id="msg">   <?php 
           error_reporting(0);
         $mensage=$_GET['mensage'];
    if(isset($mensage)){?>
-   <font style="color: red;font-weight: bold;"><?php echo $mensage;?></font><?php } ?> 
+   <font style="font-weight: bold;"><?php echo $mensage;?></font><?php } ?> </div>
       </div>
         <?php include 'footer.php';?>
     </body>

@@ -155,7 +155,7 @@ overflow: auto;
            <form class="navbar-form navbar-right">
         <div class="form-group">  
                          <div class="col-lg-10">
-         <input type="text" id="service" name="service" class="form-control" placeholder="cedula paciente" >
+         <input type="text" id="service" name="service" class="form-control" placeholder="cédula paciente" >
                                  </div>
                           </div>        
   <div id="suggestions"><font style="color:white;"></font></div>

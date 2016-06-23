@@ -183,7 +183,7 @@ function capitalize(s)//convierte minusculas a Mayusculas
           <div id="menus">
                 <a href="#" onclick="mostrarDiv()"> <button id="mostrar"  class="btn btn-primary btn-group-sm">Agregar Campo</button></a>
    <a href="#" onclick="mostrarDiv()"> <button id="ocultar"  class="btn btn-primary btn-group-sm">Ocultar Tabla de Atributos</button></a>
-   <a href="nuevaVersion.php" > <button id="ver"  class="btn btn-primary btn-group-sm">Nueva Version</button></a> 
+   <a href="nuevaVersion.php" > <button id="ver"  class="btn btn-primary btn-group-sm">Nueva Versión</button></a> 
   <!-- Buscar atributo <input type="search" name="buscaratr" id="buscaratr">-->  
    <form id="miform" class="form-horizontal"  method="post" enctype="multipart/form-data">
           <br> <table class="table-responsive" border="1">  

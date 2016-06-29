@@ -20,6 +20,19 @@
    <script src="js/formToWizard.js" type="text/javascript"></script>
    <script src="js/jquery.js" type="text/javascript"></script>
    <script type="text/javascript">
+        function validarFormulario(){
+         var ok=false;
+         var dato=document.getElementById("pass").value;
+         if(dato==""){
+             alert("El campo contraseña está vacio");
+            
+         }else{
+             ok=true;
+         }
+         return ok;
+         
+     }
+       
         $(function(){
 	//Aqui se coge el elemento y con la propiedad .on que requiere dos  parametros : change (cuando el valor de ese id cambie, que es cuando se elige otra opcion en la desplegable)y ejecutar la siguiente funcion cuando se haga change
 	$("#user").on('blur', function(){
@@ -39,6 +52,7 @@
            //  datatypo='user='+user;//genero un array con indice
       
     });
+    
     
    </script>
 </head>
@@ -93,7 +107,7 @@ Heterogéneos </h3>
                <div class="form-group">  
                               <label  class="col-sm-8 control-label"></label>
                                  <div class="col-lg-10">
-                                     <input type="submit" value="Ingresar" class="btn btn-primary btn-group-justified">
+                                     <input type="submit" value="Ingresar"  onclick="return validarFormulario();" class="btn btn-primary btn-group-justified">
                                  </div>
                           </div>
                       </form> 

@@ -71,7 +71,7 @@ $(document).ready(function(){
                  '<label  class="col-sm-8 control-label">'+ capitalize($dato) +'</label>'+
     '<div class="col-lg-10">'+
         '<input type="text" id="'+ $dato +'" name="'+ $dato +'" value="'+ $dato1 +'" readonly=>'+
-            '<input type="button" id="'+ $dato +'" value="-" style="color: red;" name="eliminar" ident="'+ $dato +'" onclick="eliminarElementoDom('+$id_att+')">Obligatorio<input type="checkbox" id="'+ $id_att +'" name="'+ $id_att +'"></div></div>').appendTo($fieldset);  
+            '<input type="button" id="'+ $dato +'" value="X" style="color: red;" name="eliminar" ident="'+ $dato +'" onclick="eliminarElementoDom('+$id_att+')">Obligatorio<input type="checkbox" id="'+ $id_att +'" name="'+ $id_att +'"></div></div>').appendTo($fieldset);  
             $(' <div class="form-group">'+
     '<div class="col-lg-10">').appendTo($fieldset);
     $('<input type="submit" value="Guardar Formulario" ident="guardo" id="guardo" class="btn btn-primary btn-group-justified">').appendTo($fieldset);
@@ -166,7 +166,7 @@ function capitalize(s)//convierte minusculas a Mayusculas
    <?php include 'cabezal.php';?>
     <div class="container-fluid">
           <div id="menus">
-                <a href="#" onclick="mostrarDiv()"> <button id="mostrar"  class="btn btn-primary btn-group-sm">Agregar Campo</button></a>
+                <a href="#" onclick="mostrarDiv()"> <button id="mostrar"  class="btn btn-primary btn-group-sm">Agregar Atributo</button></a>
    <a href="#" onclick="mostrarDiv()"> <button id="ocultar"  class="btn btn-primary btn-group-sm">Ocultar Tabla de Atributos</button></a>
        <form id="miform" class="form-horizontal" action="" method="post" enctype="multipart/form-data">
           <br> <table class="table-responsive" border="1">  
@@ -217,16 +217,17 @@ function capitalize(s)//convierte minusculas a Mayusculas
                 </div> 
            
           </div>
-      <h6><font style="font-weight: bold;">Para eliminar atributo agregado,<br> doble clic sobre el botón |-| al costado de cada atributo</font> </h6>
+        <br><br>
+      <div style="float: right;"><h6><font style="font-weight: bold;">Para agregar atributo,<br> clic sobre el nombre del atributo</font> </h6></div>
       
-     <?php
-error_reporting(0);
+      <h6><font style="font-weight: bold;">Para eliminar atributo agregado,<br> doble clic sobre el botón |<font style="color: red;">X</font>| al costado de cada atributo</font> </h6>
+      <?php
+               error_reporting(0);
    $mensage=$_GET['mensage'];
    if(isset($mensage)){ ?>
       <font style="color: red;font-weight: bold;"><?php echo $mensage;?></font> 
      <?php } ?>
-      <div style="float: right;"><h6><font style="font-weight: bold;">Para agregar atributo,<br> clic sobre el nombre del atributo</font> </h6></div>
-       <div id="avizo"></div>
+      <div id="avizo"></div>
       
       <h3>Formulario</h3>
       <form id="my-dynamic-form" method="POST" action="nuevaVersion.php" onsubmit="return validarFormulario()"> 

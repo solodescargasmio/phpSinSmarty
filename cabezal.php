@@ -145,7 +145,7 @@ overflow: auto;
     <font style="font-weight: bold;">        
         <font style="color: #fff;">
         Paciente<br>
-        Apellido:<?php echo $apell; ?><br>Cedula : <?php echo $cedula; ?></font><br>
+        Apellido:<?php echo ucfirst($apell); ?><br>Cedula : <?php echo $cedula; ?></font><br>
     <a tabindex="-1" class="navbar-brand" href="cerrar.php">Cambiar Paciente</a>
  </div>
    <?php }; ?>
@@ -169,7 +169,7 @@ overflow: auto;
        <ul class="nav navbar-nav">
            <?php if((strcmp($operador,"comun")==0)||(strcmp($operador,"admin")==0)){?> 
               <li class="dropdown">
-            <a href="#" class="dropdown-toggle js-activated" data-toggle="dropdown">Formularios <b class="caret"></b></a>
+            <a href="#" class="dropdown-toggle js-activated" data-toggle="dropdown">Llenar Formularios <b class="caret"></b></a>
            <ul class="dropdown-menu">
                <?php 
                $form=new formulario();
